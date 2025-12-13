@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ----------- Banking Professional Theme ----------- */
+    --background: 220 18% 97%;
+    --foreground: 220 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 25% 10%;
+
+    /* Primary — Deep Trust Blue (#2A4491) */
+    --primary: 220 60% 33%;
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary — Muted Banking Gray */
+    --secondary: 220 10% 85%;
+    --secondary-foreground: 220 30% 15%;
+
+    --muted: 220 10% 90%;
+    --muted-foreground: 220 10% 40%;
+
+    --accent: 220 60% 33%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Actions */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders */
+    --border: 220 60% 33%;
+    --input: 220 60% 33%;
+    --ring: 220 60% 33%;
+
+    --radius: 0.6rem;
+  }
+
+  .dark {
+    --background: 220 20% 6%;
+    --foreground: 0 0% 96%;
+
+    --card: 220 15% 10%;
+    --card-foreground: 0 0% 96%;
+
+    --popover: 220 15% 10%;
+    --popover-foreground: 0 0% 96%;
+
+    --primary: 220 60% 33%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 10% 22%;
+    --secondary-foreground: 0 0% 96%;
+
+    --muted: 220 10% 25%;
+    --muted-foreground: 220 10% 65%;
+
+    --accent: 220 60% 33%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 96%;
+
+    --border: 220 60% 33%;
+    --input: 220 60% 33%;
+    --ring: 220 60% 33%;
+
+    --radius: 0.6rem;
+  }
+
+  /* Global Typography */
+  body {
+    @apply antialiased text-[15px] tracking-wide;
+  }
+}
+
+@layer components {
+  /* Professional Gradient Text (subtle) */
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary/90 to-primary bg-clip-text text-transparent;
+  }
+
+  /* Bank Glass Card */
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-md border border-border rounded-xl shadow-[0_2px_10px_rgba(0,0,0,0.06)];
+  }
+
+  /* Hover Glow (Trust Blue) */
+  .glow-hover:hover {
+    @apply shadow-[0_0_20px_-4px_rgba(42,68,145,0.35)] transition-shadow duration-300;
+  }
+
+  /* Cleaner Scrollbar Hidden */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Stepper Buttons */
+  .stepper-btn {
+    @apply px-4 py-2 rounded-lg border bg-white hover:bg-muted transition-all cursor-pointer text-sm font-medium;
+  }
+  .stepper-btn-active {
+    @apply bg-primary text-white border-primary shadow;
+  }
+
+  /* Form Inputs */
+  .bank-input {
+    @apply border border-border rounded-md px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-primary focus:border-primary transition-all;
+  }
+
+  /* Section Titles */
+  .section-title {
+    @apply text-lg font-semibold text-primary mb-2;
+  }
+}
