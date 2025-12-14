@@ -78,7 +78,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { LogOut, UserPlus, Settings, FileText } from "lucide-react";
-import { useAuthStore } from "@/stores/AuthStores";
+import { useAuthStore } from "@/stores/authStore";
 import { useNavigate } from "react-router-dom";
 import DashboardCharts from "@/components/DasdhboardCharts";
 

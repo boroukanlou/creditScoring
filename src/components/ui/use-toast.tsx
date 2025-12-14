@@ -8,10 +8,10 @@ export type Toast = {
   variant?: "default" | "destructive";
 };
 
-const toast = () => {
-  const { toast } = useToast();
-  return toast;
-};
+// const toast = () => {
+//   const { toast } = useToast();
+//   return toast;
+// };
 
 export function useToast() {
   return {

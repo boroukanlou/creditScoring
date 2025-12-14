@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "@/pages/auth/Login";
-import { useAuthStore } from "@/stores/AuthStores";
+import { useAuthStore } from "@/stores/authStore";
 import Dashboard from "@/pages/Dashboard";
 import NewCustomer from "@/pages/NewCustomer";
 import Reports from "@/pages/Reports";

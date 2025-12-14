@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { useAuthStore } from "@/stores/AuthStores";
+import { useAuthStore } from "@/stores/authStore";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
