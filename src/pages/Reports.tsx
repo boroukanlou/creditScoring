@@ -64,6 +64,7 @@ import ApprovalRateByWorstDelinquency from "./reports/ApprovalRateByWorstDelinqu
 import CreditLineStrategy from "./reports/CreditLineStrategy";
 import ScorecardCharacteristicAnalysis from "./reports/scorecardCharacteristicAnalysis";
 import FullScorecardCharacteristicAnalysis from "./reports/fullScorecardCharacteristicAnalysis";
+import AccountQuality from "./reports/AccountQuality";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -441,6 +442,7 @@ export default function Reports() {
               <TabsTrigger value="full-scorecard-characteristic-analysis">
                 Full Scorecard Characteristic Analysis
               </TabsTrigger>
+              <TabsTrigger value="account-quality">Account Quality</TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -472,6 +474,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="full-scorecard-characteristic-analysis">
               <FullScorecardCharacteristicAnalysis />
+            </TabsContent>
+            <TabsContent value="account-quality">
+              <AccountQuality />
             </TabsContent>
 
             <TabsContent value="applicant-history">
