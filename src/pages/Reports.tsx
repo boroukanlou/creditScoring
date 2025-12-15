@@ -61,6 +61,7 @@ import CharacteristicReport from "./reports/characteristicReport";
 import SystemStabilityReport from "./reports/systemStabilityReport";
 import CharacteristicAnalysis from "./reports/CharacteristicAnalysis";
 import ApprovalRateByWorstDelinquency from "./reports/approvalRateByWorstDelinquency";
+import CreditLineStrategy from "./reports/CreditLineStrategy";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -429,6 +430,9 @@ export default function Reports() {
               <TabsTrigger value="approval-rate-by-worst-deliquency">
                 Approval Rate by Worst Deliquency
               </TabsTrigger>
+              <TabsTrigger value="credit-line-strategy">
+                Credit Line Strategy
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -451,6 +455,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="approval-rate-by-worst-deliquency">
               <ApprovalRateByWorstDelinquency />
+            </TabsContent>
+            <TabsContent value="credit-line-strategy">
+              <CreditLineStrategy />
             </TabsContent>
 
             <TabsContent value="applicant-history">
