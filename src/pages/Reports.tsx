@@ -70,6 +70,7 @@ import ScorecardAccuracy from "./reports/ScorecardAccuracy";
 import VintageAnalysis from "./reports/VintageAnalysis";
 import DelinquencyMigration from "./reports/DelinquencyMigration";
 import RollRate from "./reports/RollRate";
+import SystemStabilityTrend from "./reports/SystemStabilityTrend";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -459,6 +460,9 @@ export default function Reports() {
                 Deliquency Migration
               </TabsTrigger>
               <TabsTrigger value="roll-rate">Roll Rate</TabsTrigger>
+              <TabsTrigger value="system-stability-trend">
+                System Stability Trend
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -508,6 +512,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="roll-rate">
               <RollRate />
+            </TabsContent>
+            <TabsContent value="system-stability-trend">
+              <SystemStabilityTrend />
             </TabsContent>
 
             <TabsContent value="applicant-history">
