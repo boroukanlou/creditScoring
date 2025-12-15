@@ -18,7 +18,7 @@ export default function SystemStabilityReport() {
     <>
       <CardHeader>
         <CardTitle className="text-2xl font-bold text-gray-800">
-          System Stability Report (Exhibit 8.1)
+          System Stability Report
         </CardTitle>
         <CardDescription className="text-base">
           Comparison of actual vs. expected bad rates across score ranges with

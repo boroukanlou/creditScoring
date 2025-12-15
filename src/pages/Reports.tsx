@@ -59,6 +59,7 @@ import DelinquencyPerformance from "./reports/DeliquencyPerformance";
 import GainsTable from "./reports/GainsTeble";
 import CharacteristicReport from "./reports/characteristicReport";
 import SystemStabilityReport from "./reports/systemStabilityReport";
+import CharacteristicAnalysis from "./reports/CharacteristicAnalysis";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -421,6 +422,9 @@ export default function Reports() {
               <TabsTrigger value="system-stability-report">
                 System Stability Report
               </TabsTrigger>
+              <TabsTrigger value="characteristic-analsis">
+                Characteristic Analysis
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -437,6 +441,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="system-stability-report">
               <SystemStabilityReport />
+            </TabsContent>
+            <TabsContent value="characteristic-analsis">
+              <CharacteristicAnalysis />
             </TabsContent>
 
             <TabsContent value="applicant-history">
