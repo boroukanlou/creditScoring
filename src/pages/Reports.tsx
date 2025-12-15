@@ -65,6 +65,7 @@ import CreditLineStrategy from "./reports/CreditLineStrategy";
 import ScorecardCharacteristicAnalysis from "./reports/scorecardCharacteristicAnalysis";
 import FullScorecardCharacteristicAnalysis from "./reports/fullScorecardCharacteristicAnalysis";
 import AccountQuality from "./reports/AccountQuality";
+import OverrideReport from "./reports/OverrideReport";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -443,6 +444,7 @@ export default function Reports() {
                 Full Scorecard Characteristic Analysis
               </TabsTrigger>
               <TabsTrigger value="account-quality">Account Quality</TabsTrigger>
+              <TabsTrigger value="override-report">Override Report</TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -477,6 +479,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="account-quality">
               <AccountQuality />
+            </TabsContent>
+            <TabsContent value="override-report">
+              <OverrideReport />
             </TabsContent>
 
             <TabsContent value="applicant-history">
