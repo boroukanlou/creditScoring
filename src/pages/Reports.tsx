@@ -67,6 +67,7 @@ import FullScorecardCharacteristicAnalysis from "./reports/FullScorecardCharacte
 import AccountQuality from "./reports/AccountQuality";
 import OverrideReport from "./reports/OverrideReport";
 import ScorecardAccuracy from "./reports/ScorecardAccuracy";
+import VintageAnalysis from "./reports/VintageAnalysis";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -449,6 +450,9 @@ export default function Reports() {
               <TabsTrigger value="scorecard-accuracy">
                 Scorecard Accuracy
               </TabsTrigger>
+              <TabsTrigger value="vintage-analysis">
+                Vintage Analysis
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -489,6 +493,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="scorecard-accuracy">
               <ScorecardAccuracy />
+            </TabsContent>
+            <TabsContent value="vintage-analysis">
+              <VintageAnalysis />
             </TabsContent>
 
             <TabsContent value="applicant-history">
