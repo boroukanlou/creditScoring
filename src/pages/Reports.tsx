@@ -58,6 +58,7 @@ import FinalScoreReport from "./reports/FinalScoreReports";
 import DelinquencyPerformance from "./reports/DeliquencyPerformance";
 import GainsTable from "./reports/GainsTeble";
 import CharacteristicReport from "./reports/characteristicReport";
+import SystemStabilityReport from "./reports/systemStabilityReport";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -228,7 +229,6 @@ export default function Reports() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <Button
             variant="ghost"
@@ -261,7 +261,6 @@ export default function Reports() {
           </Button>
         </div>
 
-        {/* Filters */}
         <Card className="mb-8">
           <CardContent className="pt-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -315,9 +314,7 @@ export default function Reports() {
           </CardContent>
         </Card>
 
-        {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          {/* Score Distribution Bar */}
           <Card className="col-span-1 lg:col-span-1">
             <CardHeader>
               <CardTitle>Score Distribution (by 100-point buckets)</CardTitle>
@@ -340,7 +337,6 @@ export default function Reports() {
             </CardContent>
           </Card>
 
-          {/* Tier Pie */}
           <Card className="col-span-1">
             <CardHeader>
               <CardTitle>Tier Distribution</CardTitle>
@@ -374,7 +370,6 @@ export default function Reports() {
             </CardContent>
           </Card>
 
-          {/* Recent Trend */}
           <Card className="col-span-1">
             <CardHeader>
               <CardTitle>Recent Scores Trend</CardTitle>
@@ -403,7 +398,6 @@ export default function Reports() {
           </Card>
         </div>
 
-        {/* Tabs with Reports */}
         <Card className="mb-8">
           <Tabs
             value={activeTab}
@@ -424,6 +418,9 @@ export default function Reports() {
               <TabsTrigger value="characteristic-report">
                 Characteristic Report
               </TabsTrigger>
+              <TabsTrigger value="system-stability-report">
+                System Stability Report
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -438,8 +435,10 @@ export default function Reports() {
             <TabsContent value="characteristic-report">
               <CharacteristicReport />
             </TabsContent>
+            <TabsContent value="system-stability-report">
+              <SystemStabilityReport />
+            </TabsContent>
 
-            {/* Applicant History Tab - حالا با استایل یکسان و حرفه‌ای */}
             <TabsContent value="applicant-history">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-gray-800">

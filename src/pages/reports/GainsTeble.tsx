@@ -1,4 +1,3 @@
-// gainsTable.tsx
 import {
   Table,
   TableBody,

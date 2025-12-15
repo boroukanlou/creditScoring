@@ -1,4 +1,3 @@
-// delinquencyPerformance.tsx
 import {
   Table,
   TableBody,

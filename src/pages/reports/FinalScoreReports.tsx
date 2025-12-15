@@ -1,4 +1,3 @@
-// finalScoreReport.tsx
 import { useMemo } from "react";
 import {
   Table,
@@ -20,7 +19,6 @@ interface FinalScoreReportProps {
   customers: CustomerRecord[];
 }
 
-// Helper: safe score access (stored score only – no recalculation)
 const getScoreObj = (customer: CustomerRecord) =>
   // @ts-ignore
   customer.score ?? customer.data?.score ?? null;
@@ -37,7 +35,7 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
       { min: 760, max: 900, label: "760-900" },
     ];
 
-    const CUTOFF = 620; // Decision cutoff: ≥620 → Approve/Conditional, <620 → Refer/Decline
+    const CUTOFF = 620;
 
     const reportRows = ranges
       .map((range) => {
@@ -59,8 +57,8 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
             : "0%";
 
         const isBelowCutoff = range.max < CUTOFF;
-        const lowside = isBelowCutoff ? approved : null; // Approved below cutoff (bad approvals)
-        const highside = !isBelowCutoff ? applicants - approved : null; // Rejected above cutoff (lost goods)
+        const lowside = isBelowCutoff ? approved : null;
+        const highside = !isBelowCutoff ? applicants - approved : null;
 
         return {
           range: range.label,
@@ -73,7 +71,6 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
       })
       .filter((row) => row.applicants > 0); // Hide empty ranges
 
-    // Totals
     const totalApplicants = customers.length;
     const totalApproved = customers.filter((c) =>
       ["Approve", "Approve with Conditions"].includes(
@@ -85,7 +82,6 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
         ? ((totalApproved / totalApplicants) * 100).toFixed(1) + "%"
         : "0%";
 
-    // Above/Below Cutoff summary
     const aboveCutoffApplicants = customers.filter(
       (c) => (getScoreObj(c)?.score ?? 0) >= CUTOFF
     ).length;
@@ -102,7 +98,6 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
     const belowCutoffApplicants = totalApplicants - aboveCutoffApplicants;
     const belowCutoffApproved = totalApproved - aboveCutoffApproved;
 
-    // Cumulative lowside/highside (sum of bad approvals / lost goods)
     const cumulativeLowside = reportRows.reduce(
       (sum, row) => sum + (row.lowside ?? 0),
       0
@@ -198,7 +193,6 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
                 </TableRow>
               ))}
 
-              {/* Total Row */}
               <TableRow className="font-bold bg-muted hover:bg-indigo-50 transition-colors">
                 <TableCell>Total</TableCell>
                 <TableCell className="text-center">
@@ -218,7 +212,6 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
                 </TableCell>
               </TableRow>
 
-              {/* Above Cutoff Row */}
               <TableRow className="hover:bg-indigo-50 transition-colors">
                 <TableCell className="font-medium">
                   Above Cutoff (≥620)
@@ -237,7 +230,6 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
                 </TableCell>
               </TableRow>
 
-              {/* Below Cutoff Row */}
               <TableRow className="hover:bg-indigo-50 transition-colors">
                 <TableCell className="font-medium">
                   Below Cutoff (&lt;620)
