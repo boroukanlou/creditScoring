@@ -1,3 +1,4 @@
+// finalScoreReport.tsx
 import { useMemo } from "react";
 import {
   Table,
@@ -19,6 +20,7 @@ interface FinalScoreReportProps {
   customers: CustomerRecord[];
 }
 
+// Helper: safe score access (stored score only – no recalculation)
 const getScoreObj = (customer: CustomerRecord) =>
   // @ts-ignore
   customer.score ?? customer.data?.score ?? null;
@@ -35,27 +37,30 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
       { min: 760, max: 900, label: "760-900" },
     ];
 
-    const CUTOFF = 620;
+    const CUTOFF = 620; // Decision cutoff: ≥620 → Approve/Conditional, <620 → Refer/Decline
+
     const reportRows = ranges
       .map((range) => {
         const inRange = customers.filter((c) => {
           const score = getScoreObj(c)?.score ?? 0;
           return score >= range.min && score <= range.max;
         });
+
         const applicants = inRange.length;
         const approved = inRange.filter((c) =>
           ["Approve", "Approve with Conditions"].includes(
             getScoreObj(c)?.decision ?? ""
           )
         ).length;
+
         const percentApproved =
           applicants > 0
             ? ((approved / applicants) * 100).toFixed(1) + "%"
             : "0%";
 
         const isBelowCutoff = range.max < CUTOFF;
-        const lowside = isBelowCutoff ? approved : null;
-        const highside = !isBelowCutoff ? applicants - approved : null;
+        const lowside = isBelowCutoff ? approved : null; // Approved below cutoff (bad approvals)
+        const highside = !isBelowCutoff ? applicants - approved : null; // Rejected above cutoff (lost goods)
 
         return {
           range: range.label,
@@ -66,8 +71,9 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
           highside,
         };
       })
-      .filter((row) => row.applicants > 0);
+      .filter((row) => row.applicants > 0); // Hide empty ranges
 
+    // Totals
     const totalApplicants = customers.length;
     const totalApproved = customers.filter((c) =>
       ["Approve", "Approve with Conditions"].includes(
@@ -79,6 +85,7 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
         ? ((totalApproved / totalApplicants) * 100).toFixed(1) + "%"
         : "0%";
 
+    // Above/Below Cutoff summary
     const aboveCutoffApplicants = customers.filter(
       (c) => (getScoreObj(c)?.score ?? 0) >= CUTOFF
     ).length;
@@ -91,9 +98,11 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
         )
       );
     }).length;
+
     const belowCutoffApplicants = totalApplicants - aboveCutoffApplicants;
     const belowCutoffApproved = totalApproved - aboveCutoffApproved;
 
+    // Cumulative lowside/highside (sum of bad approvals / lost goods)
     const cumulativeLowside = reportRows.reduce(
       (sum, row) => sum + (row.lowside ?? 0),
       0
@@ -118,69 +127,145 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
         applicants: belowCutoffApplicants,
         approved: belowCutoffApproved,
       },
-      cumulative: { lowside: cumulativeLowside, highside: cumulativeHighside },
+      cumulative: {
+        lowside: cumulativeLowside,
+        highside: cumulativeHighside,
+      },
     };
   }, [customers]);
 
   return (
     <>
       <CardHeader>
-        <CardTitle>Final Score Report</CardTitle>
-        <CardDescription>
-          Approval rates by score range (dynamic based on historical data)
+        <CardTitle className="text-2xl font-bold text-gray-800">
+          Final Score Report
+        </CardTitle>
+        <CardDescription className="text-base">
+          Approval rates by score range (dynamic based on historical scored
+          applicants)
         </CardDescription>
       </CardHeader>
+
       <CardContent>
         <div className="overflow-x-auto">
-          <Table>
+          <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
             <TableHeader>
-              <TableRow>
-                <TableHead>Score Range</TableHead>
-                <TableHead>Applicants</TableHead>
-                <TableHead>Approved</TableHead>
-                <TableHead>% Approved</TableHead>
-                <TableHead>Lowside</TableHead>
-                <TableHead>Highside</TableHead>
+              <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white hover:bg-indigo-800">
+                <TableHead className="font-bold text-white">
+                  Score Range
+                </TableHead>
+                <TableHead className="font-bold text-white text-center">
+                  Applicants
+                </TableHead>
+                <TableHead className="font-bold text-white text-center">
+                  Approved
+                </TableHead>
+                <TableHead className="font-bold text-white text-center">
+                  % Approved
+                </TableHead>
+                <TableHead className="font-bold text-white text-center">
+                  Lowside
+                </TableHead>
+                <TableHead className="font-bold text-white text-center">
+                  Highside
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {finalScoreReport.rows.map((row, index) => (
-                <TableRow key={index}>
-                  <TableCell>{row.range}</TableCell>
-                  <TableCell>{row.applicants}</TableCell>
-                  <TableCell>{row.approved}</TableCell>
-                  <TableCell>{row.percentApproved}</TableCell>
-                  <TableCell>{row.lowside ?? "-"}</TableCell>
-                  <TableCell>{row.highside ?? "-"}</TableCell>
+                <TableRow
+                  key={index}
+                  className="hover:bg-indigo-50 transition-colors"
+                >
+                  <TableCell className="font-semibold text-gray-800">
+                    {row.range}
+                  </TableCell>
+                  <TableCell className="text-center">
+                    {row.applicants}
+                  </TableCell>
+                  <TableCell className="text-center text-primary font-medium">
+                    {row.approved}
+                  </TableCell>
+                  <TableCell className="text-center text-primary font-semibold">
+                    {row.percentApproved}
+                  </TableCell>
+                  <TableCell className="text-center text-destructive">
+                    {row.lowside ?? "-"}
+                  </TableCell>
+                  <TableCell className="text-center text-destructive">
+                    {row.highside ?? "-"}
+                  </TableCell>
                 </TableRow>
               ))}
-              <TableRow className="font-bold">
+
+              {/* Total Row */}
+              <TableRow className="font-bold bg-muted hover:bg-indigo-50 transition-colors">
                 <TableCell>Total</TableCell>
-                <TableCell>{finalScoreReport.total.applicants}</TableCell>
-                <TableCell>{finalScoreReport.total.approved}</TableCell>
-                <TableCell>{finalScoreReport.total.percent}</TableCell>
-                <TableCell>{finalScoreReport.cumulative.lowside}</TableCell>
-                <TableCell>{finalScoreReport.cumulative.highside}</TableCell>
+                <TableCell className="text-center">
+                  {finalScoreReport.total.applicants}
+                </TableCell>
+                <TableCell className="text-center text-primary">
+                  {finalScoreReport.total.approved}
+                </TableCell>
+                <TableCell className="text-center text-primary">
+                  {finalScoreReport.total.percent}
+                </TableCell>
+                <TableCell className="text-center text-destructive">
+                  {finalScoreReport.cumulative.lowside}
+                </TableCell>
+                <TableCell className="text-center text-destructive">
+                  {finalScoreReport.cumulative.highside}
+                </TableCell>
               </TableRow>
-              <TableRow>
-                <TableCell>Above Cutoff</TableCell>
-                <TableCell>{finalScoreReport.above.applicants}</TableCell>
-                <TableCell>{finalScoreReport.above.approved}</TableCell>
-                <TableCell>-</TableCell>
-                <TableCell>-</TableCell>
-                <TableCell>-</TableCell>
+
+              {/* Above Cutoff Row */}
+              <TableRow className="hover:bg-indigo-50 transition-colors">
+                <TableCell className="font-medium">
+                  Above Cutoff (≥620)
+                </TableCell>
+                <TableCell className="text-center">
+                  {finalScoreReport.above.applicants}
+                </TableCell>
+                <TableCell className="text-center text-primary">
+                  {finalScoreReport.above.approved}
+                </TableCell>
+                <TableCell className="text-center">-</TableCell>
+                <TableCell className="text-center">-</TableCell>
+                <TableCell className="text-center text-destructive">
+                  {finalScoreReport.above.applicants -
+                    finalScoreReport.above.approved}
+                </TableCell>
               </TableRow>
-              <TableRow>
-                <TableCell>Below Cutoff</TableCell>
-                <TableCell>{finalScoreReport.below.applicants}</TableCell>
-                <TableCell>{finalScoreReport.below.approved}</TableCell>
-                <TableCell>-</TableCell>
-                <TableCell>-</TableCell>
-                <TableCell>-</TableCell>
+
+              {/* Below Cutoff Row */}
+              <TableRow className="hover:bg-indigo-50 transition-colors">
+                <TableCell className="font-medium">
+                  Below Cutoff (&lt;620)
+                </TableCell>
+                <TableCell className="text-center">
+                  {finalScoreReport.below.applicants}
+                </TableCell>
+                <TableCell className="text-center text-destructive">
+                  {finalScoreReport.below.approved}
+                </TableCell>
+                <TableCell className="text-center">-</TableCell>
+                <TableCell className="text-center text-destructive">
+                  {finalScoreReport.below.approved}
+                </TableCell>
+                <TableCell className="text-center">-</TableCell>
               </TableRow>
             </TableBody>
           </Table>
         </div>
+
+        <p className="text-sm text-gray-500 italic mt-6">
+          * Lowside: Approved applicants below cutoff (potential bad loans).
+          <br />
+          * Highside: Rejected applicants above cutoff (lost good business).
+          <br />
+          Data is calculated dynamically from all scored applicants in the
+          system.
+        </p>
       </CardContent>
     </>
   );

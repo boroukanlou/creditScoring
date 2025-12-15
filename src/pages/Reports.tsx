@@ -57,6 +57,7 @@ import {
 import FinalScoreReport from "./reports/FinalScoreReports";
 import DelinquencyPerformance from "./reports/DeliquencyPerformance";
 import GainsTable from "./reports/GainsTeble";
+import CharacteristicReport from "./reports/characteristicReport";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -227,6 +228,7 @@ export default function Reports() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <Button
             variant="ghost"
@@ -259,6 +261,7 @@ export default function Reports() {
           </Button>
         </div>
 
+        {/* Filters */}
         <Card className="mb-8">
           <CardContent className="pt-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -312,7 +315,9 @@ export default function Reports() {
           </CardContent>
         </Card>
 
+        {/* Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          {/* Score Distribution Bar */}
           <Card className="col-span-1 lg:col-span-1">
             <CardHeader>
               <CardTitle>Score Distribution (by 100-point buckets)</CardTitle>
@@ -335,6 +340,7 @@ export default function Reports() {
             </CardContent>
           </Card>
 
+          {/* Tier Pie */}
           <Card className="col-span-1">
             <CardHeader>
               <CardTitle>Tier Distribution</CardTitle>
@@ -368,6 +374,7 @@ export default function Reports() {
             </CardContent>
           </Card>
 
+          {/* Recent Trend */}
           <Card className="col-span-1">
             <CardHeader>
               <CardTitle>Recent Scores Trend</CardTitle>
@@ -396,13 +403,14 @@ export default function Reports() {
           </Card>
         </div>
 
+        {/* Tabs with Reports */}
         <Card className="mb-8">
           <Tabs
             value={activeTab}
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-5">
               <TabsTrigger value="applicant-history">
                 Applicant History
               </TabsTrigger>
@@ -413,7 +421,11 @@ export default function Reports() {
                 Delinquency Performance
               </TabsTrigger>
               <TabsTrigger value="gains-table">Gains Table</TabsTrigger>
+              <TabsTrigger value="characteristic-report">
+                Characteristic Report
+              </TabsTrigger>
             </TabsList>
+
             <TabsContent value="final-score-report">
               <FinalScoreReport customers={customers} />
             </TabsContent>
@@ -423,10 +435,19 @@ export default function Reports() {
             <TabsContent value="gains-table">
               <GainsTable />
             </TabsContent>
+            <TabsContent value="characteristic-report">
+              <CharacteristicReport />
+            </TabsContent>
 
+            {/* Applicant History Tab - حالا با استایل یکسان و حرفه‌ای */}
             <TabsContent value="applicant-history">
               <CardHeader>
-                <CardTitle>Applicant History</CardTitle>
+                <CardTitle className="text-2xl font-bold text-gray-800">
+                  Applicant History
+                </CardTitle>
+                <CardDescription className="text-base">
+                  List of all scored applicants with filters applied
+                </CardDescription>
               </CardHeader>
               <CardContent>
                 {filteredCustomers.length === 0 ? (
@@ -442,16 +463,30 @@ export default function Reports() {
                   </div>
                 ) : (
                   <div className="overflow-x-auto">
-                    <Table>
+                    <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
                       <TableHeader>
-                        <TableRow>
-                          <TableHead>Date</TableHead>
-                          <TableHead>Applicant</TableHead>
-                          <TableHead>National ID</TableHead>
-                          <TableHead className="text-center">Score</TableHead>
-                          <TableHead>Tier</TableHead>
-                          <TableHead>Decision</TableHead>
-                          <TableHead className="text-right">Actions</TableHead>
+                        <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white hover:bg-indigo-800">
+                          <TableHead className="font-bold text-white">
+                            Date
+                          </TableHead>
+                          <TableHead className="font-bold text-white">
+                            Applicant
+                          </TableHead>
+                          <TableHead className="font-bold text-white">
+                            National ID
+                          </TableHead>
+                          <TableHead className="font-bold text-white text-center">
+                            Score
+                          </TableHead>
+                          <TableHead className="font-bold text-white text-center">
+                            Tier
+                          </TableHead>
+                          <TableHead className="font-bold text-white text-center">
+                            Decision
+                          </TableHead>
+                          <TableHead className="font-bold text-white text-right">
+                            Actions
+                          </TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -460,9 +495,9 @@ export default function Reports() {
                           return (
                             <TableRow
                               key={customer.id}
-                              className="hover:bg-gray-50"
+                              className="hover:bg-indigo-50 transition-colors"
                             >
-                              <TableCell className="font-medium">
+                              <TableCell className="font-medium text-gray-700">
                                 <div className="flex items-center gap-2">
                                   <Calendar className="w-4 h-4 text-gray-500" />
                                   {format(
@@ -471,40 +506,37 @@ export default function Reports() {
                                   )}
                                 </div>
                               </TableCell>
-                              <TableCell className="font-semibold">
+                              <TableCell className="font-semibold text-gray-800">
                                 {getField(customer, "fullName") || "—"}
                               </TableCell>
-                              <TableCell className="font-mono text-sm">
+                              <TableCell className="font-mono text-sm text-gray-600">
                                 {getField(customer, "nationalId") || "—"}
                               </TableCell>
                               <TableCell className="text-center">
-                                <div className="text-2xl font-bold">
+                                <div className="text-3xl font-bold text-primary">
                                   {scoreObj ? scoreObj.score : "—"}
                                 </div>
                                 <div className="text-xs text-gray-500">
                                   / 900
                                 </div>
                               </TableCell>
-                              <TableCell>
+                              <TableCell className="text-center">
                                 {scoreObj ? getTierBadge(scoreObj.tier) : "—"}
                               </TableCell>
-                              <TableCell>
+                              <TableCell className="text-center">
                                 {scoreObj
                                   ? getDecisionBadge(scoreObj.decision)
                                   : "—"}
                               </TableCell>
                               <TableCell className="text-right">
-                                <div className="flex items-center justify-end gap-2">
-                                  {/* Delete Button */}
-                                  <Button
-                                    variant="ghost"
-                                    size="sm"
-                                    onClick={() => deleteCustomer(customer.id)}
-                                    className="text-red-600 hover:text-red-800"
-                                  >
-                                    <Trash2 className="w-4 h-4" />
-                                  </Button>
-                                </div>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  onClick={() => deleteCustomer(customer.id)}
+                                  className="text-red-600 hover:text-red-800 hover:bg-red-50"
+                                >
+                                  <Trash2 className="w-4 h-4" />
+                                </Button>
                               </TableCell>
                             </TableRow>
                           );
