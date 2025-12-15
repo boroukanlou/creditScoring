@@ -56,6 +56,7 @@ import {
 } from "recharts";
 import FinalScoreReport from "./reports/FinalScoreReports";
 import DelinquencyPerformance from "./reports/DeliquencyPerformance";
+import GainsTable from "./reports/GainsTeble";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -411,6 +412,7 @@ export default function Reports() {
               <TabsTrigger value="delinquency-report">
                 Delinquency Performance
               </TabsTrigger>
+              <TabsTrigger value="gains-table">Gains Table</TabsTrigger>
             </TabsList>
             <TabsContent value="final-score-report">
               <FinalScoreReport customers={customers} />
@@ -418,6 +420,10 @@ export default function Reports() {
             <TabsContent value="delinquency-report">
               <DelinquencyPerformance />
             </TabsContent>
+            <TabsContent value="gains-table">
+              <GainsTable />
+            </TabsContent>
+
             <TabsContent value="applicant-history">
               <CardHeader>
                 <CardTitle>Applicant History</CardTitle>
