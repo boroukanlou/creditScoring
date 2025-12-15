@@ -58,14 +58,6 @@ export default function NewCustomer() {
             <CustomerForm />
           </CardContent>
         </Card>
-
-        {/* Footer Note */}
-        <div className="mt-8 text-center text-sm text-gray-500">
-          <p>
-            All information is processed locally • Score calculated using
-            rule-based engine • No data leaves your browser
-          </p>
-        </div>
       </div>
     </div>
   );

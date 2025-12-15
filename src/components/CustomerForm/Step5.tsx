@@ -39,7 +39,7 @@ export default function Step5() {
               <FormItem>
                 <FormLabel>Full Name *</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Jane Smith" />
+                  <Input {...field} />
                 </FormControl>
                 <FormMessage>{errors.emergencyName?.message}</FormMessage>
               </FormItem>
@@ -56,7 +56,7 @@ export default function Step5() {
                 <FormControl>
                   <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger>
-                      <SelectValue placeholder="Select" />
+                      <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="Spouse">Spouse</SelectItem>
@@ -82,7 +82,7 @@ export default function Step5() {
               <FormItem>
                 <FormLabel>Phone *</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="+1 (555) 123-4567" />
+                  <Input {...field} />
                 </FormControl>
                 <FormMessage>{errors.emergencyPhone?.message}</FormMessage>
               </FormItem>

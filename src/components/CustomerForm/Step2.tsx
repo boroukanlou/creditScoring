@@ -41,11 +41,7 @@ export default function Step2() {
             <FormItem className="md:col-span-2">
               <FormLabel>Residential Address *</FormLabel>
               <FormControl>
-                <Textarea
-                  {...field}
-                  rows={3}
-                  placeholder="123 Main St, Apt 4B"
-                />
+                <Textarea {...field} rows={3} />
               </FormControl>
               <FormMessage>{errors.residentialAddress?.message}</FormMessage>
             </FormItem>
@@ -60,7 +56,7 @@ export default function Step2() {
             <FormItem>
               <FormLabel>City *</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="New York" />
+                <Input {...field} />
               </FormControl>
               <FormMessage>{errors.city?.message}</FormMessage>
             </FormItem>
@@ -75,7 +71,7 @@ export default function Step2() {
             <FormItem>
               <FormLabel>State / Province *</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="NY" />
+                <Input {...field} />
               </FormControl>
               <FormMessage>{errors.state?.message}</FormMessage>
             </FormItem>
@@ -90,7 +86,7 @@ export default function Step2() {
             <FormItem>
               <FormLabel>ZIP / Postal Code *</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="10001" />
+                <Input {...field} />
               </FormControl>
               <FormMessage>{errors.zip?.message}</FormMessage>
             </FormItem>
@@ -105,11 +101,7 @@ export default function Step2() {
             <FormItem className="md:col-span-2">
               <FormLabel>Mailing Address (if different)</FormLabel>
               <FormControl>
-                <Textarea
-                  {...field}
-                  rows={3}
-                  placeholder="Leave blank if same"
-                />
+                <Textarea {...field} rows={3} />
               </FormControl>
               <FormMessage>{errors.mailingAddress?.message}</FormMessage>
             </FormItem>
@@ -124,7 +116,7 @@ export default function Step2() {
             <FormItem>
               <FormLabel>Home Phone</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="(555) 123-4567" />
+                <Input {...field} />
               </FormControl>
               <FormMessage>{errors.homePhone?.message}</FormMessage>
             </FormItem>
@@ -139,7 +131,7 @@ export default function Step2() {
             <FormItem>
               <FormLabel>Mobile Phone *</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="+1 (555) 987-6543" />
+                <Input {...field} />
               </FormControl>
               <FormMessage>{errors.mobilePhone?.message}</FormMessage>
             </FormItem>
@@ -154,7 +146,7 @@ export default function Step2() {
             <FormItem>
               <FormLabel>Email Address</FormLabel>
               <FormControl>
-                <Input {...field} type="email" placeholder="john@example.com" />
+                <Input {...field} type="email" />
               </FormControl>
               <FormMessage>{errors.email?.message}</FormMessage>
             </FormItem>

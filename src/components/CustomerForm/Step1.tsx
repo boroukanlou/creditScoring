@@ -40,7 +40,7 @@ export default function Step1() {
             <FormItem>
               <FormLabel>Full Name *</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="John Doe" />
+                <Input {...field} />
               </FormControl>
               <FormMessage>{errors.fullName?.message}</FormMessage>
             </FormItem>
@@ -55,7 +55,7 @@ export default function Step1() {
             <FormItem>
               <FormLabel>Preferred Name / Nickname</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="Johnny" />
+                <Input {...field} />
               </FormControl>
               <FormMessage>{errors.nickname?.message}</FormMessage>
             </FormItem>
@@ -85,7 +85,7 @@ export default function Step1() {
             <FormItem>
               <FormLabel>National ID / SSN *</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="123-45-6789" />
+                <Input {...field} />
               </FormControl>
               <FormMessage>{errors.nationalId?.message}</FormMessage>
             </FormItem>
@@ -153,12 +153,7 @@ export default function Step1() {
             <FormItem className="md:col-span-2">
               <FormLabel>Number of Dependents</FormLabel>
               <FormControl>
-                <Input
-                  type="number"
-                  {...field}
-                  placeholder="0"
-                  value={field.value ?? ""}
-                />
+                <Input type="number" {...field} value={field.value ?? ""} />
               </FormControl>
               <FormMessage>{errors.dependents?.message}</FormMessage>
             </FormItem>

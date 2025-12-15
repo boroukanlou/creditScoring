@@ -41,7 +41,7 @@ export default function Step3() {
             <FormItem>
               <FormLabel>Current Employer *</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="ABC Corp" />
+                <Input {...field} />
               </FormControl>
               <FormMessage>{errors.currentEmployer?.message}</FormMessage>
             </FormItem>
@@ -56,7 +56,7 @@ export default function Step3() {
             <FormItem>
               <FormLabel>Job Title *</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="Software Engineer" />
+                <Input {...field} />
               </FormControl>
               <FormMessage>{errors.jobTitle?.message}</FormMessage>
             </FormItem>
@@ -86,7 +86,7 @@ export default function Step3() {
             <FormItem>
               <FormLabel>Work Phone</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="(555) 123-9876" />
+                <Input {...field} />
               </FormControl>
               <FormMessage>{errors.workPhone?.message}</FormMessage>
             </FormItem>
@@ -103,7 +103,7 @@ export default function Step3() {
               <FormControl>
                 <Select onValueChange={field.onChange} value={field.value}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select status" />
+                    <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Full-time">Full-time</SelectItem>
@@ -128,12 +128,7 @@ export default function Step3() {
             <FormItem>
               <FormLabel>Annual Income (USD) *</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  type="number"
-                  placeholder="75000"
-                  value={field.value ?? ""}
-                />
+                <Input {...field} type="number" value={field.value ?? ""} />
               </FormControl>
               <FormMessage>{errors.annualIncome?.message}</FormMessage>
             </FormItem>
@@ -148,12 +143,7 @@ export default function Step3() {
             <FormItem>
               <FormLabel>Other Income (per year)</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  type="number"
-                  placeholder="0"
-                  value={field.value ?? ""}
-                />
+                <Input {...field} type="number" value={field.value ?? ""} />
               </FormControl>
               <FormMessage>{errors.otherIncome?.message}</FormMessage>
             </FormItem>

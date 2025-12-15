@@ -120,11 +120,7 @@ export default function Step4() {
               Credit Card Limits & Balances (limit:balance, one per line)
             </FormLabel>
             <FormControl>
-              <Textarea
-                {...field}
-                rows={5}
-                placeholder="5000:1200\n10000:8500"
-              />
+              <Textarea {...field} rows={5} />
             </FormControl>
             <p className="text-xs text-gray-500 mt-1">
               Example: 5000:1200 → $5,000 limit, $1,200 balance
