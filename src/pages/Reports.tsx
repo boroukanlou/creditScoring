@@ -63,6 +63,7 @@ import CharacteristicAnalysis from "./reports/CharacteristicAnalysis";
 import ApprovalRateByWorstDelinquency from "./reports/ApprovalRateByWorstDelinquency";
 import CreditLineStrategy from "./reports/CreditLineStrategy";
 import ScorecardCharacteristicAnalysis from "./reports/scorecardCharacteristicAnalysis";
+import FullScorecardCharacteristicAnalysis from "./reports/fullScorecardCharacteristicAnalysis";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -408,7 +409,7 @@ export default function Reports() {
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-5">
+            <TabsList className="grid w-full grid-cols-5 mb-14">
               <TabsTrigger value="applicant-history">
                 Applicant History
               </TabsTrigger>
@@ -436,6 +437,9 @@ export default function Reports() {
               </TabsTrigger>
               <TabsTrigger value="scorecard-characteristic-analysis">
                 Scorecard Characteristic Analysis
+              </TabsTrigger>
+              <TabsTrigger value="full-scorecard-characteristic-analysis">
+                Full Scorecard Characteristic Analysis
               </TabsTrigger>
             </TabsList>
 
@@ -465,6 +469,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="scorecard-characteristic-analysis">
               <ScorecardCharacteristicAnalysis />
+            </TabsContent>
+            <TabsContent value="full-scorecard-characteristic-analysis">
+              <FullScorecardCharacteristicAnalysis />
             </TabsContent>
 
             <TabsContent value="applicant-history">
