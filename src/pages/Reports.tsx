@@ -57,11 +57,12 @@ import {
 import FinalScoreReport from "./reports/FinalScoreReports";
 import DelinquencyPerformance from "./reports/DeliquencyPerformance";
 import GainsTable from "./reports/GainsTeble";
-import CharacteristicReport from "./reports/characteristicReport";
+import CharacteristicReport from "./reports/CharacteristicReport";
 import SystemStabilityReport from "./reports/systemStabilityReport";
 import CharacteristicAnalysis from "./reports/CharacteristicAnalysis";
-import ApprovalRateByWorstDelinquency from "./reports/approvalRateByWorstDelinquency";
+import ApprovalRateByWorstDelinquency from "./reports/ApprovalRateByWorstDelinquency";
 import CreditLineStrategy from "./reports/CreditLineStrategy";
+import ScorecardCharacteristicAnalysis from "./reports/scorecardCharacteristicAnalysis";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -433,6 +434,9 @@ export default function Reports() {
               <TabsTrigger value="credit-line-strategy">
                 Credit Line Strategy
               </TabsTrigger>
+              <TabsTrigger value="scorecard-characteristic-analysis">
+                Scorecard Characteristic Analysis
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -458,6 +462,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="credit-line-strategy">
               <CreditLineStrategy />
+            </TabsContent>
+            <TabsContent value="scorecard-characteristic-analysis">
+              <ScorecardCharacteristicAnalysis />
             </TabsContent>
 
             <TabsContent value="applicant-history">
