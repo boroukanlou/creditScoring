@@ -60,6 +60,7 @@ import GainsTable from "./reports/GainsTeble";
 import CharacteristicReport from "./reports/characteristicReport";
 import SystemStabilityReport from "./reports/systemStabilityReport";
 import CharacteristicAnalysis from "./reports/CharacteristicAnalysis";
+import ApprovalRateByWorstDelinquency from "./reports/approvalRateByWorstDelinquency";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -425,6 +426,9 @@ export default function Reports() {
               <TabsTrigger value="characteristic-analsis">
                 Characteristic Analysis
               </TabsTrigger>
+              <TabsTrigger value="approval-rate-by-worst-deliquency">
+                Approval Rate by Worst Deliquency
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -444,6 +448,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="characteristic-analsis">
               <CharacteristicAnalysis />
+            </TabsContent>
+            <TabsContent value="approval-rate-by-worst-deliquency">
+              <ApprovalRateByWorstDelinquency />
             </TabsContent>
 
             <TabsContent value="applicant-history">

@@ -80,18 +80,16 @@ export default function CharacteristicAnalysis() {
                   28%
                 </TableCell>
                 <TableCell className="text-center font-bold text-primary">
-                  26
+                  25
                 </TableCell>
-                <TableCell className="text-center text-primary">
-                  -1.68
-                </TableCell>
+                <TableCell className="text-center text-primary">-1</TableCell>
               </TableRow>
               <TableRow className="hover:bg-indigo-50 transition-colors">
                 <TableCell className="font-medium">38-45</TableCell>
                 <TableCell className="text-center">12%</TableCell>
                 <TableCell className="text-center text-primary">6%</TableCell>
                 <TableCell className="text-center font-bold text-primary">
-                  26
+                  28
                 </TableCell>
                 <TableCell className="text-center text-primary">
                   -1.68
@@ -105,7 +103,7 @@ export default function CharacteristicAnalysis() {
                   35
                 </TableCell>
                 <TableCell className="text-center text-primary">
-                  -2.63
+                  -1.75
                 </TableCell>
               </TableRow>
 
