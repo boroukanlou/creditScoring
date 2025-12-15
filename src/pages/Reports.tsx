@@ -62,10 +62,11 @@ import SystemStabilityReport from "./reports/systemStabilityReport";
 import CharacteristicAnalysis from "./reports/CharacteristicAnalysis";
 import ApprovalRateByWorstDelinquency from "./reports/ApprovalRateByWorstDelinquency";
 import CreditLineStrategy from "./reports/CreditLineStrategy";
-import ScorecardCharacteristicAnalysis from "./reports/scorecardCharacteristicAnalysis";
-import FullScorecardCharacteristicAnalysis from "./reports/fullScorecardCharacteristicAnalysis";
+import ScorecardCharacteristicAnalysis from "./reports/ScorecardCharacteristicAnalysis";
+import FullScorecardCharacteristicAnalysis from "./reports/FullScorecardCharacteristicAnalysis";
 import AccountQuality from "./reports/AccountQuality";
 import OverrideReport from "./reports/OverrideReport";
+import ScorecardAccuracy from "./reports/ScorecardAccuracy";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -445,6 +446,9 @@ export default function Reports() {
               </TabsTrigger>
               <TabsTrigger value="account-quality">Account Quality</TabsTrigger>
               <TabsTrigger value="override-report">Override Report</TabsTrigger>
+              <TabsTrigger value="scorecard-accuracy">
+                Scorecard Accuracy
+              </TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -482,6 +486,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="override-report">
               <OverrideReport />
+            </TabsContent>
+            <TabsContent value="scorecard-accuracy">
+              <ScorecardAccuracy />
             </TabsContent>
 
             <TabsContent value="applicant-history">
