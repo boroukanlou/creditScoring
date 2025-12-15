@@ -71,6 +71,7 @@ import VintageAnalysis from "./reports/VintageAnalysis";
 import DelinquencyMigration from "./reports/DelinquencyMigration";
 import RollRate from "./reports/RollRate";
 import SystemStabilityTrend from "./reports/SystemStabilityTrend";
+import TradeoffChart from "./reports/tradeoffChart";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -463,6 +464,7 @@ export default function Reports() {
               <TabsTrigger value="system-stability-trend">
                 System Stability Trend
               </TabsTrigger>
+              <TabsTrigger value="tradeoff-chart">Tradeoff Chart</TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -515,6 +517,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="system-stability-trend">
               <SystemStabilityTrend />
+            </TabsContent>
+            <TabsContent value="tradeoff-chart">
+              <TradeoffChart />
             </TabsContent>
 
             <TabsContent value="applicant-history">
