@@ -69,6 +69,7 @@ import OverrideReport from "./reports/OverrideReport";
 import ScorecardAccuracy from "./reports/ScorecardAccuracy";
 import VintageAnalysis from "./reports/VintageAnalysis";
 import DelinquencyMigration from "./reports/DelinquencyMigration";
+import RollRate from "./reports/RollRate";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -457,6 +458,7 @@ export default function Reports() {
               <TabsTrigger value="deliquency-migration">
                 Deliquency Migration
               </TabsTrigger>
+              <TabsTrigger value="roll-rate">Roll Rate</TabsTrigger>
             </TabsList>
 
             <TabsContent value="final-score-report">
@@ -503,6 +505,9 @@ export default function Reports() {
             </TabsContent>
             <TabsContent value="deliquency-migration">
               <DelinquencyMigration />
+            </TabsContent>
+            <TabsContent value="roll-rate">
+              <RollRate />
             </TabsContent>
 
             <TabsContent value="applicant-history">
