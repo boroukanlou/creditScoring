@@ -17,32 +17,39 @@ import { FileText } from "lucide-react";
 export default function CharacteristicReport() {
   return (
     <>
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <FileText className="w-5 h-5 text-primary" />
+      <CardHeader className="pb-4">
+        <CardTitle className="text-2xl font-semibold text-gray-900 flex items-center gap-3">
+          <FileText className="w-7 h-7 text-primary" />
           <span>Characteristic Report</span>
         </CardTitle>
-        <CardDescription className="text-base">
+        <CardDescription className="text-base text-gray-600 mt-2">
           Distribution, points allocated, and bad rate by age group, plus
           approval rates by score and age
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-12">
+      <CardContent className="pt-0 space-y-12">
+        {/* جدول اول: توزیع و بد ریت بر اساس سن */}
         <div className="overflow-x-auto">
-          <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
+          <Table className="w-full border-collapse">
             <TableHeader>
-              <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white hover:bg-indigo-800">
-                <TableHead className="font-bold text-white">Age</TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Distr.
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Points
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Bad Rate
-                </TableHead>
+              <TableRow className="bg-primary/90 hover:bg-primary/80 transition-all">
+                {["Age", "Distr.", "Points", "Bad Rate"].map((title, idx) => (
+                  <TableHead
+                    key={idx}
+                    className={`text-white font-semibold text-left py-3 px-5 whitespace-nowrap ${
+                      idx === 0 ? "first:rounded-tl-lg" : ""
+                    } ${idx === 3 ? "last:rounded-tr-lg" : ""}`}
+                  >
+                    {title.includes(" ")
+                      ? title.split(" ").map((t, i) => (
+                          <span key={i}>
+                            {t} <br />
+                          </span>
+                        ))
+                      : title}
+                  </TableHead>
+                ))}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -57,18 +64,18 @@ export default function CharacteristicReport() {
               ].map((row) => (
                 <TableRow
                   key={row.age}
-                  className="hover:bg-indigo-50 transition-colors"
+                  className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200"
                 >
-                  <TableCell className="font-semibold text-gray-800">
+                  <TableCell className="font-semibold text-primary py-3 px-5">
                     {row.age}
                   </TableCell>
-                  <TableCell className="text-center font-medium">
+                  <TableCell className="text-gray-800 py-3 px-5">
                     {row.distr}
                   </TableCell>
-                  <TableCell className="text-center font-bold text-primary">
+                  <TableCell className="text-gray-800 py-3 px-5">
                     {row.points}
                   </TableCell>
-                  <TableCell className="text-center font-medium text-destructive">
+                  <TableCell className="text-red-600 font-medium py-3 px-5">
                     {row.bad}
                   </TableCell>
                 </TableRow>
@@ -77,32 +84,30 @@ export default function CharacteristicReport() {
           </Table>
         </div>
 
+        {/* جدول دوم: نرخ تأیید بر اساس امتیاز و سن */}
         <div className="overflow-x-auto">
-          <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
+          <Table className="w-full border-collapse">
             <TableHeader>
-              <TableRow className="bg-gradient-to-r from-secondary-foreground to-emerald-700 text-white">
-                <TableHead className="font-bold text-white">Score</TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Missing
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  18–22
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  23–26
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  27–29
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  30–35
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  35–44
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  44+
-                </TableHead>
+              <TableRow className="bg-primary/90 hover:bg-primary/80 transition-all">
+                {[
+                  "Score",
+                  "Missing",
+                  "18–22",
+                  "23–26",
+                  "27–29",
+                  "30–35",
+                  "35–44",
+                  "44+",
+                ].map((title, idx) => (
+                  <TableHead
+                    key={idx}
+                    className={`text-white font-semibold text-left py-3 px-5 whitespace-nowrap ${
+                      idx === 0 ? "first:rounded-tl-lg" : ""
+                    } ${idx === 7 ? "last:rounded-tr-lg" : ""}`}
+                  >
+                    {title}
+                  </TableHead>
+                ))}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -126,15 +131,15 @@ export default function CharacteristicReport() {
               ].map((row) => (
                 <TableRow
                   key={row.score}
-                  className="hover:bg-emerald-50 transition-colors"
+                  className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200"
                 >
-                  <TableCell className="font-bold text-secondary-foreground text-sm">
+                  <TableCell className="font-semibold text-primary py-3 px-5">
                     {row.score}
                   </TableCell>
                   {row.rates.map((rate, i) => (
                     <TableCell
                       key={i}
-                      className="text-center font-semibold text-gray-800"
+                      className="text-gray-800 py-3 px-5 text-center"
                     >
                       {rate}
                     </TableCell>

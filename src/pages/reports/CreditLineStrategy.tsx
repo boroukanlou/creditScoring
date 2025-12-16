@@ -17,144 +17,88 @@ import { CreditCard } from "lucide-react";
 export default function CreditLineStrategy() {
   return (
     <>
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <CreditCard className="w-5 h-5 text-primary" />
+      <CardHeader className="pb-4">
+        <CardTitle className="text-2xl font-semibold text-gray-900 flex items-center gap-3">
+          <CreditCard className="w-7 h-7 text-primary" />
           <span>Credit Line Strategy</span>
         </CardTitle>
-        <CardDescription className="text-base">
+        <CardDescription className="text-base text-gray-600 mt-2">
           Assigned initial credit line amounts by score range and debt service
           ratio (DSR)
         </CardDescription>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="pt-0">
         <div className="overflow-x-auto">
-          <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
+          <Table className="w-full border-collapse">
             <TableHeader>
-              <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white hover:bg-indigo-800">
+              <TableRow className="bg-primary/90 hover:bg-primary/80 transition-all">
                 <TableHead
                   rowSpan={2}
-                  className="font-bold text-white align-bottom"
+                  className="text-white font-semibold text-left py-3 px-5 whitespace-nowrap first:rounded-tl-lg align-bottom"
                 >
                   Score
                 </TableHead>
                 <TableHead
                   colSpan={5}
-                  className="font-bold text-white text-center"
+                  className="text-white font-semibold text-center py-3 px-5 last:rounded-tr-lg"
                 >
                   Debt Service Ratio
                 </TableHead>
               </TableRow>
-              <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white">
-                <TableHead className="font-bold text-white text-center">
-                  0-10%
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  11-15%
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  16-24%
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  25-35%
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  36%+
-                </TableHead>
+              <TableRow className="bg-primary/90 hover:bg-primary/80 transition-all">
+                {["0-10%", "11-15%", "16-24%", "25-35%", "36%+"].map(
+                  (dsr, idx) => (
+                    <TableHead
+                      key={idx}
+                      className="text-white font-semibold text-center py-3 px-5 whitespace-nowrap"
+                    >
+                      {dsr}
+                    </TableHead>
+                  )
+                )}
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">230-234</TableCell>
-                <TableCell className="text-center font-semibold text-primary">
-                  $3,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $3,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $2,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $2,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $2,000
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">235-239</TableCell>
-                <TableCell className="text-center font-semibold text-primary">
-                  $4,000
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $3,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $3,000
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $2,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $2,000
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">240-244</TableCell>
-                <TableCell className="text-center font-semibold text-primary">
-                  $4,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $4,000
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $3,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $3,000
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $2,500
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">245-249</TableCell>
-                <TableCell className="text-center font-semibold text-primary">
-                  $5,000
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $4,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $4,000
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $3,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $3,000
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">250+</TableCell>
-                <TableCell className="text-center font-semibold text-primary">
-                  $7,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $5,000
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $4,500
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $4,000
-                </TableCell>
-                <TableCell className="text-center font-semibold">
-                  $3,500
-                </TableCell>
-              </TableRow>
+              {[
+                {
+                  score: "230-234",
+                  cols: ["$3,500", "$3,500", "$2,500", "$2,500", "$2,000"],
+                },
+                {
+                  score: "235-239",
+                  cols: ["$4,000", "$3,500", "$3,000", "$2,500", "$2,000"],
+                },
+                {
+                  score: "240-244",
+                  cols: ["$4,500", "$4,000", "$3,500", "$3,000", "$2,500"],
+                },
+                {
+                  score: "245-249",
+                  cols: ["$5,000", "$4,500", "$4,000", "$3,500", "$3,000"],
+                },
+                {
+                  score: "250+",
+                  cols: ["$7,500", "$5,000", "$4,500", "$4,000", "$3,500"],
+                },
+              ].map((row) => (
+                <TableRow
+                  key={row.score}
+                  className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200"
+                >
+                  <TableCell className="font-semibold text-primary py-3 px-5">
+                    {row.score}
+                  </TableCell>
+                  {row.cols.map((value, idx) => (
+                    <TableCell
+                      key={idx}
+                      className="text-gray-800 font-medium py-3 px-5 text-center"
+                    >
+                      {value}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </div>

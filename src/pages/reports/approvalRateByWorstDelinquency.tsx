@@ -1,4 +1,3 @@
-// approvalRateByWorstDelinquency.tsx
 import {
   Table,
   TableBody,
@@ -18,101 +17,138 @@ import { CheckCircle } from "lucide-react";
 export default function ApprovalRateByWorstDelinquency() {
   return (
     <>
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <CheckCircle className="w-5 h-5 text-primary" />
+      <CardHeader className="pb-4">
+        <CardTitle className="text-2xl font-semibold text-gray-900 flex items-center gap-3">
+          <CheckCircle className="w-7 h-7 text-primary" />
           <span>Approval Rate by Score – Worst Delinquency at Bureau</span>
         </CardTitle>
-        <CardDescription className="text-base">
+        <CardDescription className="text-base text-gray-600 mt-2">
           Approval rates and observed delinquency/bankruptcy rates by score for
           applicants with worst bureau delinquency status
         </CardDescription>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="pt-0">
         <div className="overflow-x-auto">
-          <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
+          <Table className="w-full border-collapse">
             <TableHeader>
-              <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white hover:bg-indigo-800">
-                <TableHead className="font-bold text-white">Score</TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Nvr Delq
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  30 days
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  60 days
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  90 days
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  120 days
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Bankrupt
-                </TableHead>
+              <TableRow className="bg-primary/90 hover:bg-primary/80 transition-all">
+                {[
+                  "Score",
+                  "Nvr Delq",
+                  "30 days",
+                  "60 days",
+                  "90 days",
+                  "120 days",
+                  "Bankrupt",
+                ].map((title, idx) => (
+                  <TableHead
+                    key={idx}
+                    className={`text-white font-semibold text-left py-3 px-5 whitespace-nowrap text-center ${
+                      idx === 0 ? "rounded-tl-lg" : ""
+                    } ${idx === 6 ? "rounded-tr-lg" : ""}`}
+                  >
+                    {title.includes(" ")
+                      ? title.split(" ").map((t, i) => (
+                          <span key={i}>
+                            {t} <br />
+                          </span>
+                        ))
+                      : title}
+                  </TableHead>
+                ))}
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">210</TableCell>
-                <TableCell className="text-center text-primary font-semibold">
+              <TableRow className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200">
+                <TableCell className="font-semibold text-primary py-3 px-5">
+                  210
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   97%
                 </TableCell>
-                <TableCell className="text-center text-primary">70%</TableCell>
-                <TableCell className="text-center text-primary">56%</TableCell>
-                <TableCell className="text-center text-primary">50%</TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  70%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  56%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  50%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   41%
                 </TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   22%
                 </TableCell>
               </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">211</TableCell>
-                <TableCell className="text-center text-primary font-semibold">
+              <TableRow className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200">
+                <TableCell className="font-semibold text-primary py-3 px-5">
+                  211
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   95%
                 </TableCell>
-                <TableCell className="text-center text-primary">62%</TableCell>
-                <TableCell className="text-center text-primary">48%</TableCell>
-                <TableCell className="text-center text-primary">41%</TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  62%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  48%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  41%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   36%
                 </TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   18%
                 </TableCell>
               </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">212</TableCell>
-                <TableCell className="text-center text-primary font-semibold">
+              <TableRow className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200">
+                <TableCell className="font-semibold text-primary py-3 px-5">
+                  212
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   92%
                 </TableCell>
-                <TableCell className="text-center text-primary">58%</TableCell>
-                <TableCell className="text-center text-primary">41%</TableCell>
-                <TableCell className="text-center text-primary">38%</TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  58%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  41%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  38%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   31%
                 </TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   12%
                 </TableCell>
               </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">213</TableCell>
-                <TableCell className="text-center text-primary font-semibold">
+              <TableRow className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200">
+                <TableCell className="font-semibold text-primary py-3 px-5">
+                  213
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   87%
                 </TableCell>
-                <TableCell className="text-center text-primary">50%</TableCell>
-                <TableCell className="text-center text-primary">37%</TableCell>
-                <TableCell className="text-center text-primary">31%</TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  50%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  37%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
+                  31%
+                </TableCell>
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   25%
                 </TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-gray-900 py-3 px-5 text-center">
                   8%
                 </TableCell>
               </TableRow>
