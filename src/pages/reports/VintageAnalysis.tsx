@@ -12,13 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Calendar } from "lucide-react";
 
 export default function VintageAnalysis() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Vintage Analysis
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <Calendar className="w-5 h-5 text-primary" />
+          <span>Vintage Analysis</span>
         </CardTitle>
         <CardDescription className="text-base">
           Cumulative bad rates by booking quarter (vintage) over 5 quarters of

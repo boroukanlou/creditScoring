@@ -13,13 +13,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { TrendingUp } from "lucide-react";
 
 export default function DelinquencyMigration() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Delinquency Migration
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <TrendingUp className="w-5 h-5 text-primary" />
+          <span>Delinquency Migration</span>
         </CardTitle>
         <CardDescription className="text-base">
           Roll-rate analysis showing how accounts migrate between delinquency

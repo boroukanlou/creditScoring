@@ -12,13 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Zap } from "lucide-react";
 
 export default function CharacteristicAnalysis() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Characteristic Analysis
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <Zap className="w-5 h-5 text-primary" />
+          <span>Characteristic Analysis</span>
         </CardTitle>
         <CardDescription className="text-base">
           Comparison of expected vs. actual bad rates by age group with

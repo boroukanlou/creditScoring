@@ -184,15 +184,6 @@ export default function Dashboard() {
         </div>
 
         <DashboardCharts />
-
-        {/* Footer Info */}
-        <div className="mt-16 text-center text-sm text-gray-500">
-          <p>
-            Demo Version • Rule-based Credit Score (0-900) • Tier 1-4 Risk
-            Classification
-          </p>
-          <p className="mt-1">All data stored locally • No backend required</p>
-        </div>
       </div>
     </div>
   );

@@ -54,6 +54,14 @@ export default function AppRouter() {
             </ProtectedRoute>
           }
         />
+        <Route
+          path="/reports"
+          element={
+            <ProtectedRoute>
+              <Reports />
+            </ProtectedRoute>
+          }
+        />
 
         {/* Redirect unknown routes */}
         <Route path="*" element={<Navigate to="/" />} />

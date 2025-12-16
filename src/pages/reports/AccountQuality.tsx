@@ -12,13 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { CheckCircle } from "lucide-react";
 
 export default function AccountQuality() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Account Quality
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <CheckCircle className="w-5 h-5 text-primary" />
+          <span>Account Quality</span>
         </CardTitle>
         <CardDescription className="text-base">
           Percentage of accounts reaching different quality levels by quarter

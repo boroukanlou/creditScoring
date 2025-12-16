@@ -13,13 +13,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Activity } from "lucide-react";
 
 export default function RollRate() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Roll Rate
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <Activity className="w-5 h-5 text-primary" />
+          <span>Roll Rate</span>
         </CardTitle>
         <CardDescription className="text-base">
           Monthly roll rate analysis showing total receivables, current

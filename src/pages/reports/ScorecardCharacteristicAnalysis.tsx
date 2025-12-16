@@ -12,13 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { BarChart3 } from "lucide-react";
 
 export default function ScorecardCharacteristicAnalysis() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Scorecard Characteristic Analysis
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <BarChart3 className="w-5 h-5 text-primary" />
+          <span>Scorecard Characteristic Analysis</span>
         </CardTitle>
         <CardDescription className="text-base">
           Performance of the "Age" characteristic: expected vs. actual bad rates

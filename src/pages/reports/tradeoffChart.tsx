@@ -14,6 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { DollarSign } from "lucide-react";
 
 const data = [
   { score: 202, approval: 72, bad: 7.0 },
@@ -40,8 +41,9 @@ export default function TradeoffChart() {
   return (
     <>
       <CardHeader className="pb-4">
-        <CardTitle className="text-2xl font-semibold text-slate-900">
-          Tradeoff Chart
+        <CardTitle className="text-2xl font-semibold text-slate-900 flex items-center gap-2">
+          <DollarSign className="w-5 h-5 text-primary" />
+          <span>Tradeoff Chart</span>
         </CardTitle>
         <CardDescription className="text-sm text-slate-600 max-w-2xl">
           Relationship between approval rate and credit risk (bad rate) across

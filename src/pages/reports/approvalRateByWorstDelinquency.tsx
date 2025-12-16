@@ -13,13 +13,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { CheckCircle } from "lucide-react";
 
 export default function ApprovalRateByWorstDelinquency() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Approval Rate by Score – Worst Delinquency at Bureau
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <CheckCircle className="w-5 h-5 text-primary" />
+          <span>Approval Rate by Score – Worst Delinquency at Bureau</span>
         </CardTitle>
         <CardDescription className="text-base">
           Approval rates and observed delinquency/bankruptcy rates by score for

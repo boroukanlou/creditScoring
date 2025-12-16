@@ -11,6 +11,21 @@ import {
   Trash2,
   User,
   Calendar,
+  BarChart3,
+  TrendingUp,
+  AlertTriangle,
+  PieChart as PieChartIcon,
+  FileText,
+  Shield,
+  Activity,
+  CreditCard,
+  Target,
+  LineChart as LineChartIcon,
+  DollarSign,
+  CheckCircle,
+  Clock,
+  Zap,
+  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -37,7 +52,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
 import {
   BarChart,
@@ -55,23 +69,29 @@ import {
   Legend,
 } from "recharts";
 import FinalScoreReport from "./reports/FinalScoreReports";
-import DelinquencyPerformance from "./reports/DeliquencyPerformance";
+import ScorecardAccuracy from "./reports/ScorecardAccuracy";
+import OverrideReport from "./reports/OverrideReport";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import GainsTable from "./reports/GainsTeble";
-import CharacteristicReport from "./reports/CharacteristicReport";
-import SystemStabilityReport from "./reports/systemStabilityReport";
-import CharacteristicAnalysis from "./reports/CharacteristicAnalysis";
-import ApprovalRateByWorstDelinquency from "./reports/ApprovalRateByWorstDelinquency";
+import TradeoffChart from "./reports/tradeoffChart";
 import CreditLineStrategy from "./reports/CreditLineStrategy";
+import CharacteristicReport from "./reports/CharacteristicReport";
+import CharacteristicAnalysis from "./reports/CharacteristicAnalysis";
 import ScorecardCharacteristicAnalysis from "./reports/ScorecardCharacteristicAnalysis";
 import FullScorecardCharacteristicAnalysis from "./reports/FullScorecardCharacteristicAnalysis";
-import AccountQuality from "./reports/AccountQuality";
-import OverrideReport from "./reports/OverrideReport";
-import ScorecardAccuracy from "./reports/ScorecardAccuracy";
-import VintageAnalysis from "./reports/VintageAnalysis";
+import DelinquencyPerformance from "./reports/DeliquencyPerformance";
+import ApprovalRateByWorstDelinquency from "./reports/ApprovalRateByWorstDelinquency";
 import DelinquencyMigration from "./reports/DelinquencyMigration";
 import RollRate from "./reports/RollRate";
+import VintageAnalysis from "./reports/VintageAnalysis";
+import AccountQuality from "./reports/AccountQuality";
+import SystemStabilityReport from "./reports/systemStabilityReport";
 import SystemStabilityTrend from "./reports/SystemStabilityTrend";
-import TradeoffChart from "./reports/tradeoffChart";
 
 export default function Reports() {
   const navigate = useNavigate();
@@ -80,10 +100,10 @@ export default function Reports() {
   const [searchTerm, setSearchTerm] = useState("");
   const [tierFilter, setTierFilter] = useState<string>("all");
   const [decisionFilter, setDecisionFilter] = useState<string>("all");
-  const [activeTab, setActiveTab] = useState("applicant-history");
+  const [activeReport, setActiveReport] = useState<string>("applicant-history");
 
   const getField = (customer: CustomerRecord, key: string) =>
-    // @ts-ignore allow both shapes
+    // @ts-ignore
     (customer as any)[key] ?? customer.data?.[key] ?? "";
 
   const getScoreObj = (customer: CustomerRecord) =>
@@ -239,9 +259,182 @@ export default function Reports() {
 
   const PIE_COLORS = ["#10B981", "#3B82F6", "#F59E0B", "#EF4444"];
 
+  const reportCategories = [
+    {
+      category: "Data",
+      icon: <FileText className="w-6 h-6" />,
+      reports: [
+        {
+          id: "applicant-history",
+          title: "Applicant History",
+        },
+        {
+          id: "gains-table",
+          title: "Gains Table",
+        },
+      ],
+    },
+    {
+      category: "Overview & Performance",
+      icon: <BarChart3 className="w-6 h-6" />,
+      reports: [
+        {
+          id: "final-score-report",
+          title: "Final Score Report",
+        },
+        {
+          id: "scorecard-accuracy",
+          title: "Scorecard Accuracy",
+        },
+        {
+          id: "tradeoff-chart",
+          title: "Tradeoff Chart",
+        },
+        {
+          id: "credit-line-strategy",
+          title: "Credit Line Strategy",
+        },
+      ],
+    },
+    {
+      category: "Scorecard & Characteristics",
+      icon: <PieChartIcon className="w-6 h-6" />,
+      reports: [
+        {
+          id: "characteristic-report",
+          title: "Characteristic Report",
+        },
+        {
+          id: "characteristic-analysis",
+          title: "Characteristic Analysis",
+        },
+        {
+          id: "scorecard-characteristic-analysis",
+          title: "Scorecard Characteristic Analysis",
+        },
+        {
+          id: "full-scorecard-characteristic-analysis",
+          title: "Full Scorecard Characteristic Analysis",
+        },
+      ],
+    },
+
+    {
+      category: "Risk & Delinquency",
+      icon: <AlertTriangle className="w-6 h-6" />,
+      reports: [
+        {
+          id: "delinquency-report",
+          title: "Delinquency Performance",
+        },
+        {
+          id: "approval-rate-by-worst-deliquency",
+          title: "Approval Rate by Worst Delinquency",
+        },
+        {
+          id: "deliquency-migration",
+          title: "Delinquency Migration",
+        },
+        {
+          id: "roll-rate",
+          title: "Roll Rate",
+        },
+        {
+          id: "vintage-analysis",
+          title: "Vintage Analysis",
+        },
+      ],
+    },
+
+    {
+      category: "Portfolio & Stability",
+      icon: <Shield className="w-6 h-6" />,
+      reports: [
+        {
+          id: "account-quality",
+          title: "Account Quality",
+        },
+        {
+          id: "system-stability-report",
+          title: "System Stability Report",
+        },
+        {
+          id: "system-stability-trend",
+          title: "System Stability Trend",
+        },
+        {
+          id: "override-report",
+          title: "Override Report",
+        },
+      ],
+    },
+  ];
+
+  const renderActiveReport = (activeReport: string) => {
+    switch (activeReport) {
+      case "gains-table":
+        return <GainsTable />;
+
+      case "final-score-report":
+        return <FinalScoreReport customers={customers} />;
+
+      case "scorecard-accuracy":
+        return <ScorecardAccuracy />;
+
+      case "tradeoff-chart":
+        return <TradeoffChart />;
+
+      case "credit-line-strategy":
+        return <CreditLineStrategy />;
+
+      case "characteristic-report":
+        return <CharacteristicReport />;
+
+      case "characteristic-analysis":
+        return <CharacteristicAnalysis />;
+
+      case "scorecard-characteristic-analysis":
+        return <ScorecardCharacteristicAnalysis />;
+
+      case "full-scorecard-characteristic-analysis":
+        return <FullScorecardCharacteristicAnalysis />;
+
+      case "delinquency-report":
+        return <DelinquencyPerformance />;
+
+      case "approval-rate-by-worst-deliquency":
+        return <ApprovalRateByWorstDelinquency />;
+
+      case "deliquency-migration":
+        return <DelinquencyMigration />;
+
+      case "roll-rate":
+        return <RollRate />;
+
+      case "vintage-analysis":
+        return <VintageAnalysis />;
+
+      case "account-quality":
+        return <AccountQuality />;
+
+      case "system-stability-report":
+        return <SystemStabilityReport />;
+
+      case "system-stability-trend":
+        return <SystemStabilityTrend />;
+
+      case "override-report":
+        return <OverrideReport />;
+
+      default:
+        return <div>Please select a report</div>;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-8 px-4">
       <div className="max-w-7xl mx-auto">
+        {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <Button
             variant="ghost"
@@ -253,17 +446,17 @@ export default function Reports() {
             Back to Dashboard
           </Button>
           <div>
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-3">
               <img
                 src="logo.png"
                 alt="dadeh kavan logo"
-                className="w-10 h-10 mt-1"
+                className="w-12 h-12"
               />
               <h1 className="text-3xl font-bold text-gray-800">
-                Credit Reports & History
+                Credit Reports & Analytics
               </h1>
             </div>
-            <p className="text-gray-600 ml-12">
+            <p className="text-gray-600 mt-2">
               Total Records: {customers.length} • Filtered:{" "}
               {filteredCustomers.length}
             </p>
@@ -274,6 +467,7 @@ export default function Reports() {
           </Button>
         </div>
 
+        {/* Filters */}
         <Card className="mb-8">
           <CardContent className="pt-6">
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -327,8 +521,9 @@ export default function Reports() {
           </CardContent>
         </Card>
 
+        {/* Summary Charts */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <Card className="col-span-1 lg:col-span-1">
+          <Card>
             <CardHeader>
               <CardTitle>Score Distribution (by 100-point buckets)</CardTitle>
               <CardDescription>
@@ -350,7 +545,7 @@ export default function Reports() {
             </CardContent>
           </Card>
 
-          <Card className="col-span-1">
+          <Card>
             <CardHeader>
               <CardTitle>Tier Distribution</CardTitle>
               <CardDescription>Share of applicants per tier</CardDescription>
@@ -383,7 +578,7 @@ export default function Reports() {
             </CardContent>
           </Card>
 
-          <Card className="col-span-1">
+          <Card>
             <CardHeader>
               <CardTitle>Recent Scores Trend</CardTitle>
               <CardDescription>
@@ -411,226 +606,215 @@ export default function Reports() {
           </Card>
         </div>
 
-        <Card className="mb-8">
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-full"
-          >
-            <TabsList className="grid w-full grid-cols-5 mb-14">
-              <TabsTrigger value="applicant-history">
-                Applicant History
-              </TabsTrigger>
-              <TabsTrigger value="final-score-report">
-                Final Score Report
-              </TabsTrigger>
-              <TabsTrigger value="delinquency-report">
-                Delinquency Performance
-              </TabsTrigger>
-              <TabsTrigger value="gains-table">Gains Table</TabsTrigger>
-              <TabsTrigger value="characteristic-report">
-                Characteristic Report
-              </TabsTrigger>
-              <TabsTrigger value="system-stability-report">
-                System Stability Report
-              </TabsTrigger>
-              <TabsTrigger value="characteristic-analsis">
-                Characteristic Analysis
-              </TabsTrigger>
-              <TabsTrigger value="approval-rate-by-worst-deliquency">
-                Approval Rate by Worst Deliquency
-              </TabsTrigger>
-              <TabsTrigger value="credit-line-strategy">
-                Credit Line Strategy
-              </TabsTrigger>
-              <TabsTrigger value="scorecard-characteristic-analysis">
-                Scorecard Characteristic Analysis
-              </TabsTrigger>
-              <TabsTrigger value="full-scorecard-characteristic-analysis">
-                Full Scorecard Characteristic Analysis
-              </TabsTrigger>
-              <TabsTrigger value="account-quality">Account Quality</TabsTrigger>
-              <TabsTrigger value="override-report">Override Report</TabsTrigger>
-              <TabsTrigger value="scorecard-accuracy">
-                Scorecard Accuracy
-              </TabsTrigger>
-              <TabsTrigger value="vintage-analysis">
-                Vintage Analysis
-              </TabsTrigger>
-              <TabsTrigger value="deliquency-migration">
-                Deliquency Migration
-              </TabsTrigger>
-              <TabsTrigger value="roll-rate">Roll Rate</TabsTrigger>
-              <TabsTrigger value="system-stability-trend">
-                System Stability Trend
-              </TabsTrigger>
-              <TabsTrigger value="tradeoff-chart">Tradeoff Chart</TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="final-score-report">
-              <FinalScoreReport customers={customers} />
-            </TabsContent>
-            <TabsContent value="delinquency-report">
-              <DelinquencyPerformance />
-            </TabsContent>
-            <TabsContent value="gains-table">
-              <GainsTable />
-            </TabsContent>
-            <TabsContent value="characteristic-report">
-              <CharacteristicReport />
-            </TabsContent>
-            <TabsContent value="system-stability-report">
-              <SystemStabilityReport />
-            </TabsContent>
-            <TabsContent value="characteristic-analsis">
-              <CharacteristicAnalysis />
-            </TabsContent>
-            <TabsContent value="approval-rate-by-worst-deliquency">
-              <ApprovalRateByWorstDelinquency />
-            </TabsContent>
-            <TabsContent value="credit-line-strategy">
-              <CreditLineStrategy />
-            </TabsContent>
-            <TabsContent value="scorecard-characteristic-analysis">
-              <ScorecardCharacteristicAnalysis />
-            </TabsContent>
-            <TabsContent value="full-scorecard-characteristic-analysis">
-              <FullScorecardCharacteristicAnalysis />
-            </TabsContent>
-            <TabsContent value="account-quality">
-              <AccountQuality />
-            </TabsContent>
-            <TabsContent value="override-report">
-              <OverrideReport />
-            </TabsContent>
-            <TabsContent value="scorecard-accuracy">
-              <ScorecardAccuracy />
-            </TabsContent>
-            <TabsContent value="vintage-analysis">
-              <VintageAnalysis />
-            </TabsContent>
-            <TabsContent value="deliquency-migration">
-              <DelinquencyMigration />
-            </TabsContent>
-            <TabsContent value="roll-rate">
-              <RollRate />
-            </TabsContent>
-            <TabsContent value="system-stability-trend">
-              <SystemStabilityTrend />
-            </TabsContent>
-            <TabsContent value="tradeoff-chart">
-              <TradeoffChart />
-            </TabsContent>
-
-            <TabsContent value="applicant-history">
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold text-gray-800">
-                  Applicant History
-                </CardTitle>
-                <CardDescription className="text-base">
-                  List of all scored applicants with filters applied
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                {filteredCustomers.length === 0 ? (
-                  <div className="text-center py-16">
-                    <User className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                    <p className="text-xl text-gray-600">No records found</p>
-                    <Button
-                      className="mt-6"
-                      onClick={() => navigate("/new-customer")}
-                    >
-                      Score First Applicant
-                    </Button>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="lg:col-span-3">
+            <div className="sticky top-8">
+              <Card className="border border-gray-200/70 shadow-lg bg-white/95 backdrop-blur">
+                <CardHeader className="pb-4 border-b border-gray-200/70 bg-primary">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-xl bg-indigo-100 text-indigo-600">
+                      <BarChart3 className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h2 className="text-base font-semibold text-white">
+                        Available Reports
+                      </h2>
+                      <p className="text-xs text-gray-400 mt-0.5">
+                        Select a report to view insights
+                      </p>
+                    </div>
                   </div>
-                ) : (
-                  <div className="overflow-x-auto">
-                    <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
-                      <TableHeader>
-                        <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white hover:bg-indigo-800">
-                          <TableHead className="font-bold text-white">
-                            Date
-                          </TableHead>
-                          <TableHead className="font-bold text-white">
-                            Applicant
-                          </TableHead>
-                          <TableHead className="font-bold text-white">
-                            National ID
-                          </TableHead>
-                          <TableHead className="font-bold text-white text-center">
-                            Score
-                          </TableHead>
-                          <TableHead className="font-bold text-white text-center">
-                            Tier
-                          </TableHead>
-                          <TableHead className="font-bold text-white text-center">
-                            Decision
-                          </TableHead>
-                          <TableHead className="font-bold text-white text-right">
-                            Actions
-                          </TableHead>
-                        </TableRow>
-                      </TableHeader>
-                      <TableBody>
-                        {filteredCustomers.map((customer) => {
-                          const scoreObj = getScoreObj(customer);
-                          return (
-                            <TableRow
-                              key={customer.id}
-                              className="hover:bg-indigo-50 transition-colors"
-                            >
-                              <TableCell className="font-medium text-gray-700">
-                                <div className="flex items-center gap-2">
-                                  <Calendar className="w-4 h-4 text-gray-500" />
-                                  {format(
-                                    new Date(customer.date),
-                                    "MMM dd, yyyy"
-                                  )}
-                                </div>
-                              </TableCell>
-                              <TableCell className="font-semibold text-gray-800">
-                                {getField(customer, "fullName") || "—"}
-                              </TableCell>
-                              <TableCell className="font-mono text-sm text-gray-600">
-                                {getField(customer, "nationalId") || "—"}
-                              </TableCell>
-                              <TableCell className="text-center">
-                                <div className="text-3xl font-bold text-primary">
-                                  {scoreObj ? scoreObj.score : "—"}
-                                </div>
-                                <div className="text-xs text-gray-500">
-                                  / 900
-                                </div>
-                              </TableCell>
-                              <TableCell className="text-center">
-                                {scoreObj ? getTierBadge(scoreObj.tier) : "—"}
-                              </TableCell>
-                              <TableCell className="text-center">
-                                {scoreObj
-                                  ? getDecisionBadge(scoreObj.decision)
-                                  : "—"}
-                              </TableCell>
-                              <TableCell className="text-right">
-                                <Button
-                                  variant="ghost"
-                                  size="sm"
-                                  onClick={() => deleteCustomer(customer.id)}
-                                  className="text-red-600 hover:text-red-800 hover:bg-red-50"
+                </CardHeader>
+
+                {/* Content */}
+                <CardContent className="px-3 py-4">
+                  <Accordion
+                    type="single"
+                    collapsible
+                    defaultValue="Data"
+                    className="space-y-2"
+                  >
+                    {reportCategories.map((cat) => (
+                      <AccordionItem
+                        key={cat.category}
+                        value={cat.category}
+                        className="border border-gray-200/70 rounded-xl overflow-hidden"
+                      >
+                        {/* Category Header */}
+                        <AccordionTrigger className="px-3 py-2.5 text-sm hover:no-underline hover:bg-gray-50 transition-colors">
+                          <div className="flex items-center gap-3">
+                            <div className="p-1.5 rounded-lg bg-indigo-100 text-indigo-600">
+                              {cat.icon}
+                            </div>
+                            <span className="font-medium text-gray-800">
+                              {cat.category}
+                            </span>
+                          </div>
+                        </AccordionTrigger>
+
+                        {/* Reports */}
+                        <AccordionContent className="pt-1 pb-2">
+                          <div className="space-y-1">
+                            {cat.reports.map((report) => {
+                              const isActive = activeReport === report.id;
+
+                              return (
+                                <div
+                                  key={report.id}
+                                  onClick={() => setActiveReport(report.id)}
+                                  className={`
+                          group cursor-pointer rounded-lg px-3 py-2.5 border transition-all
+                          ${
+                            isActive
+                              ? "bg-indigo-50 border-indigo-500 shadow-sm"
+                              : "border-transparent hover:bg-gray-50"
+                          }
+                        `}
                                 >
-                                  <Trash2 className="w-4 h-4" />
-                                </Button>
-                              </TableCell>
-                            </TableRow>
-                          );
-                        })}
-                      </TableBody>
-                    </Table>
-                  </div>
-                )}
-              </CardContent>
-            </TabsContent>
-          </Tabs>
-        </Card>
+                                  <div className="flex items-start gap-3">
+                                    <div className="flex-1">
+                                      <h4
+                                        className={`
+                                text-sm font-medium ml-12
+                                ${
+                                  isActive ? "text-indigo-700" : "text-gray-800"
+                                }
+                              `}
+                                      >
+                                        {report.title}
+                                      </h4>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        </AccordionContent>
+                      </AccordionItem>
+                    ))}
+                  </Accordion>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+
+          <div className="lg:col-span-9">
+            {activeReport === "applicant-history" ? (
+              <Card className="mb-12">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+                    <User className="w-5 h-5 text-primary" />{" "}
+                    <span>Applicant History</span>
+                  </CardTitle>
+                  <CardDescription>
+                    List of all scored applicants with applied filters
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  {filteredCustomers.length === 0 ? (
+                    <div className="text-center py-16">
+                      <User className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+                      <p className="text-xl text-gray-600">No records found</p>
+                      <Button
+                        className="mt-6"
+                        onClick={() => navigate("/new-customer")}
+                      >
+                        Score First Applicant
+                      </Button>
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
+                        <TableHeader>
+                          <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white">
+                            <TableHead className="font-bold text-white">
+                              Date
+                            </TableHead>
+                            <TableHead className="font-bold text-white">
+                              Applicant
+                            </TableHead>
+                            <TableHead className="font-bold text-white">
+                              National ID
+                            </TableHead>
+                            <TableHead className="font-bold text-white text-center">
+                              Score
+                            </TableHead>
+                            <TableHead className="font-bold text-white text-center">
+                              Tier
+                            </TableHead>
+                            <TableHead className="font-bold text-white text-center">
+                              Decision
+                            </TableHead>
+                            <TableHead className="font-bold text-white text-right">
+                              Actions
+                            </TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {filteredCustomers.map((customer) => {
+                            const scoreObj = getScoreObj(customer);
+                            return (
+                              <TableRow
+                                key={customer.id}
+                                className="hover:bg-indigo-50 transition-colors"
+                              >
+                                <TableCell className="font-medium text-gray-700">
+                                  <div className="flex items-center gap-2">
+                                    <Calendar className="w-4 h-4 text-gray-500" />
+                                    {format(
+                                      new Date(customer.date),
+                                      "MMM dd, yyyy"
+                                    )}
+                                  </div>
+                                </TableCell>
+                                <TableCell className="font-semibold text-gray-800">
+                                  {getField(customer, "fullName") || "—"}
+                                </TableCell>
+                                <TableCell className="font-mono text-sm text-gray-600">
+                                  {getField(customer, "nationalId") || "—"}
+                                </TableCell>
+                                <TableCell className="text-center">
+                                  <div className="text-3xl font-bold text-primary">
+                                    {scoreObj ? scoreObj.score : "—"}
+                                  </div>
+                                  <div className="text-xs text-gray-500">
+                                    / 900
+                                  </div>
+                                </TableCell>
+                                <TableCell className="text-center">
+                                  {scoreObj ? getTierBadge(scoreObj.tier) : "—"}
+                                </TableCell>
+                                <TableCell className="text-center">
+                                  {scoreObj
+                                    ? getDecisionBadge(scoreObj.decision)
+                                    : "—"}
+                                </TableCell>
+                                <TableCell className="text-right">
+                                  <Button
+                                    variant="ghost"
+                                    size="sm"
+                                    onClick={() => deleteCustomer(customer.id)}
+                                    className="text-red-600 hover:text-red-800 hover:bg-red-50"
+                                  >
+                                    <Trash2 className="w-4 h-4" />
+                                  </Button>
+                                </TableCell>
+                              </TableRow>
+                            );
+                          })}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="mb-12">
+                <CardContent>{renderActiveReport(activeReport)}</CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -12,13 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Clock } from "lucide-react";
 
 export default function DelinquencyPerformance() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Delinquency Performance Report
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <Clock className="w-5 h-5 text-primary" />
+          <span>Delinquency Performance Report</span>
         </CardTitle>
         <CardDescription className="text-base">
           Performance by score range

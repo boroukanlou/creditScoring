@@ -12,13 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Target } from "lucide-react";
 
 export default function ScorecardAccuracy() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Scorecard Accuracy
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <Target className="w-5 h-5 text-primary" />
+          <span>Scorecard Accuracy</span>
         </CardTitle>
         <CardDescription className="text-base">
           Observed bad rates vs. expected bad rates by score range,

@@ -12,13 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Activity } from "lucide-react";
 
 export default function SystemStabilityReport() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          System Stability Report
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <Activity className="w-5 h-5 text-primary" />
+          <span>System Stability Report</span>
         </CardTitle>
         <CardDescription className="text-base">
           Comparison of actual vs. expected bad rates across score ranges with

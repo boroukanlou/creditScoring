@@ -14,6 +14,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { TrendingUp } from "lucide-react";
 
 const data = [
   { score: "0-169", actual: 9, expected: 10, actual3m: 8.5, actual6m: 9 },
@@ -83,8 +84,9 @@ export default function SystemStabilityTrend() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          System Stability Trend
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <TrendingUp className="w-5 h-5 text-primary" />
+          <span>System Stability Trend</span>
         </CardTitle>
         <CardDescription className="text-base">
           Actual vs. expected bad rates over time (current, 3 months, 6 months)

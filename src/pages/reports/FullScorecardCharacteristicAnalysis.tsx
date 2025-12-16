@@ -12,13 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { PieChartIcon } from "lucide-react";
 
 export default function FullScorecardCharacteristicAnalysis() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Full Scorecard Characteristic Analysis
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <PieChartIcon className="w-5 h-5 text-primary" />
+          <span>Full Scorecard Characteristic Analysis</span>
         </CardTitle>
         <CardDescription className="text-base">
           Detailed performance of all characteristics in the final scorecard:

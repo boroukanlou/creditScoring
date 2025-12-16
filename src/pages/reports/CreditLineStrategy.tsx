@@ -12,13 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { CreditCard } from "lucide-react";
 
 export default function CreditLineStrategy() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Credit Line Strategy
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <CreditCard className="w-5 h-5 text-primary" />
+          <span>Credit Line Strategy</span>
         </CardTitle>
         <CardDescription className="text-base">
           Assigned initial credit line amounts by score range and debt service

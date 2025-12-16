@@ -12,13 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Shield } from "lucide-react";
 
 export default function OverrideReport() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Override Report
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <Shield className="w-5 h-5 text-primary" />
+          <span>Override Report</span>
         </CardTitle>
         <CardDescription className="text-base">
           Summary of policy and manual overrides: number of cases and

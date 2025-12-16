@@ -14,6 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { type CustomerRecord } from "@/stores/customersStore";
+import { BarChart3 } from "lucide-react";
 
 interface FinalScoreReportProps {
   customers: CustomerRecord[];
@@ -132,8 +133,9 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Final Score Report
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <BarChart3 className="w-5 h-5 text-primary " />
+          <span>Final Score Report</span>
         </CardTitle>
         <CardDescription className="text-base">
           Approval rates by score range (dynamic based on historical scored

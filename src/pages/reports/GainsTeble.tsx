@@ -12,13 +12,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { LineChartIcon } from "lucide-react";
 
 export default function GainsTable() {
   return (
     <>
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800">
-          Section of a Gains Table (Exhibit 7.1)
+        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+          <LineChartIcon className="w-5 h-5 text-primary" />
+          <span> Gains Table</span>
         </CardTitle>
         <CardDescription className="text-base">
           Gains table showing cumulative goods, bads, and rates by score
