@@ -12,20 +12,10 @@ import {
   User,
   Calendar,
   BarChart3,
-  TrendingUp,
   AlertTriangle,
   PieChart as PieChartIcon,
   FileText,
   Shield,
-  Activity,
-  CreditCard,
-  Target,
-  LineChart as LineChartIcon,
-  DollarSign,
-  CheckCircle,
-  Clock,
-  Zap,
-  ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
