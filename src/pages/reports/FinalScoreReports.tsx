@@ -132,121 +132,126 @@ export default function FinalScoreReport({ customers }: FinalScoreReportProps) {
 
   return (
     <>
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <BarChart3 className="w-5 h-5 text-primary " />
+      <CardHeader className="pb-4">
+        <CardTitle className="text-2xl font-semibold text-gray-900 flex items-center gap-3">
+          <BarChart3 className="w-7 h-7 text-primary" />
           <span>Final Score Report</span>
         </CardTitle>
-        <CardDescription className="text-base">
+        <CardDescription className="text-base text-gray-600 mt-2">
           Approval rates by score range (dynamic based on historical scored
           applicants)
         </CardDescription>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="pt-0">
         <div className="overflow-x-auto">
-          <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
+          <Table className="w-full border-collapse">
             <TableHeader>
-              <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white hover:bg-indigo-800">
-                <TableHead className="font-bold text-white">
-                  Score Range
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Applicants
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Approved
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  % Approved
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Lowside
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Highside
-                </TableHead>
+              <TableRow className="bg-primary/90 hover:bg-primary/80 transition-all">
+                {[
+                  "Score Range",
+                  "Applicants",
+                  "Approved",
+                  "% Approved",
+                  "Lowside",
+                  "Highside",
+                ].map((title, idx) => (
+                  <TableHead
+                    key={idx}
+                    className={`text-white font-semibold text-left py-3 px-5 whitespace-nowrap ${
+                      idx === 0 ? "first:rounded-tl-lg" : ""
+                    } ${idx === 5 ? "last:rounded-tr-lg" : ""}`}
+                  >
+                    {title.includes(" ")
+                      ? title.split(" ").map((t, i) => (
+                          <span key={i}>
+                            {t} <br />
+                          </span>
+                        ))
+                      : title}
+                  </TableHead>
+                ))}
               </TableRow>
             </TableHeader>
             <TableBody>
               {finalScoreReport.rows.map((row, index) => (
                 <TableRow
                   key={index}
-                  className="hover:bg-indigo-50 transition-colors"
+                  className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200"
                 >
-                  <TableCell className="font-semibold text-gray-800">
+                  <TableCell className="font-semibold text-primary py-3 px-5">
                     {row.range}
                   </TableCell>
-                  <TableCell className="text-center">
+                  <TableCell className="text-gray-800 py-3 px-5">
                     {row.applicants}
                   </TableCell>
-                  <TableCell className="text-center text-primary font-medium">
+                  <TableCell className="text-green-600 font-medium py-3 px-5">
                     {row.approved}
                   </TableCell>
-                  <TableCell className="text-center text-primary font-semibold">
+                  <TableCell className="text-gray-800 py-3 px-5">
                     {row.percentApproved}
                   </TableCell>
-                  <TableCell className="text-center text-destructive">
+                  <TableCell className="text-red-600 font-medium py-3 px-5">
                     {row.lowside ?? "-"}
                   </TableCell>
-                  <TableCell className="text-center text-destructive">
+                  <TableCell className="text-red-600 font-medium py-3 px-5">
                     {row.highside ?? "-"}
                   </TableCell>
                 </TableRow>
               ))}
 
-              <TableRow className="font-bold bg-muted hover:bg-indigo-50 transition-colors">
-                <TableCell>Total</TableCell>
-                <TableCell className="text-center">
+              <TableRow className="font-bold bg-muted hover:bg-primary/5 transition-colors duration-200">
+                <TableCell className="py-3 px-5">Total</TableCell>
+                <TableCell className="text-gray-800 py-3 px-5">
                   {finalScoreReport.total.applicants}
                 </TableCell>
-                <TableCell className="text-center text-primary">
+                <TableCell className="text-green-600 font-medium py-3 px-5">
                   {finalScoreReport.total.approved}
                 </TableCell>
-                <TableCell className="text-center text-primary">
+                <TableCell className="text-gray-800 py-3 px-5">
                   {finalScoreReport.total.percent}
                 </TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-red-600 font-medium py-3 px-5">
                   {finalScoreReport.cumulative.lowside}
                 </TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-red-600 font-medium py-3 px-5">
                   {finalScoreReport.cumulative.highside}
                 </TableCell>
               </TableRow>
 
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">
+              <TableRow className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200">
+                <TableCell className="font-medium py-3 px-5">
                   Above Cutoff (≥620)
                 </TableCell>
-                <TableCell className="text-center">
+                <TableCell className="text-gray-800 py-3 px-5">
                   {finalScoreReport.above.applicants}
                 </TableCell>
-                <TableCell className="text-center text-primary">
+                <TableCell className="text-green-600 font-medium py-3 px-5">
                   {finalScoreReport.above.approved}
                 </TableCell>
-                <TableCell className="text-center">-</TableCell>
-                <TableCell className="text-center">-</TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-gray-800 py-3 px-5">-</TableCell>
+                <TableCell className="text-gray-800 py-3 px-5">-</TableCell>
+                <TableCell className="text-red-600 font-medium py-3 px-5">
                   {finalScoreReport.above.applicants -
                     finalScoreReport.above.approved}
                 </TableCell>
               </TableRow>
 
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">
+              <TableRow className="hover:bg-primary/5 transition-colors duration-200">
+                <TableCell className="font-medium py-3 px-5">
                   Below Cutoff (&lt;620)
                 </TableCell>
-                <TableCell className="text-center">
+                <TableCell className="text-gray-800 py-3 px-5">
                   {finalScoreReport.below.applicants}
                 </TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-red-600 font-medium py-3 px-5">
                   {finalScoreReport.below.approved}
                 </TableCell>
-                <TableCell className="text-center">-</TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-gray-800 py-3 px-5">-</TableCell>
+                <TableCell className="text-red-600 font-medium py-3 px-5">
                   {finalScoreReport.below.approved}
                 </TableCell>
-                <TableCell className="text-center">-</TableCell>
+                <TableCell className="text-gray-800 py-3 px-5">-</TableCell>
               </TableRow>
             </TableBody>
           </Table>

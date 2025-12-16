@@ -17,207 +17,185 @@ import { Target } from "lucide-react";
 export default function ScorecardAccuracy() {
   return (
     <>
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <Target className="w-5 h-5 text-primary" />
+      <CardHeader className="pb-4">
+        <CardTitle className="text-2xl font-semibold text-gray-900 flex items-center gap-3">
+          <Target className="w-7 h-7 text-primary" />
           <span>Scorecard Accuracy</span>
         </CardTitle>
-        <CardDescription className="text-base">
+        <CardDescription className="text-base text-gray-600 mt-2">
           Observed bad rates vs. expected bad rates by score range,
           demonstrating the accuracy of the final scorecard
         </CardDescription>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="pt-0">
         <div className="overflow-x-auto">
-          <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
+          <Table className="w-full border-collapse">
             <TableHeader>
-              <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white hover:bg-indigo-800">
-                <TableHead className="font-bold text-white">Score</TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Accounts
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Active
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  %
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Bad
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  %
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Exp Bad %
-                </TableHead>
+              <TableRow className="bg-primary/90 hover:bg-primary/80 transition-all">
+                {[
+                  "Score",
+                  "Accounts",
+                  "Active",
+                  "%",
+                  "Bad",
+                  "%",
+                  "Exp Bad %",
+                ].map((title, idx) => (
+                  <TableHead
+                    key={idx}
+                    className={`text-white font-semibold text-left py-3 px-5 whitespace-nowrap ${
+                      idx === 0 ? "first:rounded-tl-lg" : ""
+                    } ${idx === 6 ? "last:rounded-tr-lg" : ""}`}
+                  >
+                    {title.includes(" ")
+                      ? title.split(" ").map((t, i) => (
+                          <span key={i}>
+                            {t} <br />
+                          </span>
+                        ))
+                      : title}
+                  </TableHead>
+                ))}
               </TableRow>
             </TableHeader>
             <TableBody>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">0-169</TableCell>
-                <TableCell className="text-center">200</TableCell>
-                <TableCell className="text-center">198</TableCell>
-                <TableCell className="text-center">99%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  35
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  18%
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  23.0%
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">170-179</TableCell>
-                <TableCell className="text-center">348</TableCell>
-                <TableCell className="text-center">300</TableCell>
-                <TableCell className="text-center">86%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  37
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  12%
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  18.0%
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">180-189</TableCell>
-                <TableCell className="text-center">435</TableCell>
-                <TableCell className="text-center">367</TableCell>
-                <TableCell className="text-center">84%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  40
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  11%
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  14.0%
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">190-199</TableCell>
-                <TableCell className="text-center">466</TableCell>
-                <TableCell className="text-center">387</TableCell>
-                <TableCell className="text-center">83%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  37
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  10%
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  10.0%
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">200-209</TableCell>
-                <TableCell className="text-center">2,456</TableCell>
-                <TableCell className="text-center">1,876</TableCell>
-                <TableCell className="text-center">76%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  126
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  7%
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  8.0%
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">210-219</TableCell>
-                <TableCell className="text-center">4,563</TableCell>
-                <TableCell className="text-center">3,600</TableCell>
-                <TableCell className="text-center">79%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  213
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  6%
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  5.0%
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">220-229</TableCell>
-                <TableCell className="text-center">5,678</TableCell>
-                <TableCell className="text-center">4,325</TableCell>
-                <TableCell className="text-center">76%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  166
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  4%
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  4.0%
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">230-239</TableCell>
-                <TableCell className="text-center">7,658</TableCell>
-                <TableCell className="text-center">4,598</TableCell>
-                <TableCell className="text-center">60%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  106
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  2%
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  2.0%
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">240-249</TableCell>
-                <TableCell className="text-center">5,786</TableCell>
-                <TableCell className="text-center">3,546</TableCell>
-                <TableCell className="text-center">61%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  35
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  1%
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  0.8%
-                </TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">250+</TableCell>
-                <TableCell className="text-center">4,987</TableCell>
-                <TableCell className="text-center">2,176</TableCell>
-                <TableCell className="text-center">44%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  26
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  1%
-                </TableCell>
-                <TableCell className="text-center text-destructive">
-                  0.5%
-                </TableCell>
-              </TableRow>
+              {[
+                {
+                  score: "0-169",
+                  accounts: 200,
+                  active: 198,
+                  percent: "99%",
+                  bad: 35,
+                  badPercent: "18%",
+                  expBad: "23.0%",
+                },
+                {
+                  score: "170-179",
+                  accounts: 348,
+                  active: 300,
+                  percent: "86%",
+                  bad: 37,
+                  badPercent: "12%",
+                  expBad: "18.0%",
+                },
+                {
+                  score: "180-189",
+                  accounts: 435,
+                  active: 367,
+                  percent: "84%",
+                  bad: 40,
+                  badPercent: "11%",
+                  expBad: "14.0%",
+                },
+                {
+                  score: "190-199",
+                  accounts: 466,
+                  active: 387,
+                  percent: "83%",
+                  bad: 37,
+                  badPercent: "10%",
+                  expBad: "10.0%",
+                },
+                {
+                  score: "200-209",
+                  accounts: "2,456",
+                  active: "1,876",
+                  percent: "76%",
+                  bad: 126,
+                  badPercent: "7%",
+                  expBad: "8.0%",
+                },
+                {
+                  score: "210-219",
+                  accounts: "4,563",
+                  active: "3,600",
+                  percent: "79%",
+                  bad: 213,
+                  badPercent: "6%",
+                  expBad: "5.0%",
+                },
+                {
+                  score: "220-229",
+                  accounts: "5,678",
+                  active: "4,325",
+                  percent: "76%",
+                  bad: 166,
+                  badPercent: "4%",
+                  expBad: "4.0%",
+                },
+                {
+                  score: "230-239",
+                  accounts: "7,658",
+                  active: "4,598",
+                  percent: "60%",
+                  bad: 106,
+                  badPercent: "2%",
+                  expBad: "2.0%",
+                },
+                {
+                  score: "240-249",
+                  accounts: "5,786",
+                  active: "3,546",
+                  percent: "61%",
+                  bad: 35,
+                  badPercent: "1%",
+                  expBad: "0.8%",
+                },
+                {
+                  score: "250+",
+                  accounts: "4,987",
+                  active: "2,176",
+                  percent: "44%",
+                  bad: 26,
+                  badPercent: "1%",
+                  expBad: "0.5%",
+                },
+              ].map((row) => (
+                <TableRow
+                  key={row.score}
+                  className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200"
+                >
+                  <TableCell className="font-semibold text-primary py-3 px-5">
+                    {row.score}
+                  </TableCell>
+                  <TableCell className="text-gray-800 py-3 px-5">
+                    {row.accounts}
+                  </TableCell>
+                  <TableCell className="text-gray-800 py-3 px-5">
+                    {row.active}
+                  </TableCell>
+                  <TableCell className="text-gray-800 py-3 px-5">
+                    {row.percent}
+                  </TableCell>
+                  <TableCell className="text-red-600 font-medium py-3 px-5">
+                    {row.bad}
+                  </TableCell>
+                  <TableCell className="text-red-600 font-medium py-3 px-5">
+                    {row.badPercent}
+                  </TableCell>
+                  <TableCell className="text-gray-800 py-3 px-5">
+                    {row.expBad}
+                  </TableCell>
+                </TableRow>
+              ))}
 
-              <TableRow className="font-bold bg-muted hover:bg-indigo-50 transition-colors">
-                <TableCell>Total</TableCell>
-                <TableCell className="text-center">32,577</TableCell>
-                <TableCell className="text-center">21,373</TableCell>
-                <TableCell className="text-center">66%</TableCell>
-                <TableCell className="text-center text-destructive">
+              <TableRow className="font-bold bg-muted hover:bg-primary/5 transition-colors duration-200">
+                <TableCell className="py-3 px-5">Total</TableCell>
+                <TableCell className="text-gray-800 py-3 px-5">
+                  32,577
+                </TableCell>
+                <TableCell className="text-gray-800 py-3 px-5">
+                  21,373
+                </TableCell>
+                <TableCell className="text-gray-800 py-3 px-5">66%</TableCell>
+                <TableCell className="text-red-600 font-medium py-3 px-5">
                   821
                 </TableCell>
-                <TableCell className="text-center text-destructive">
+                <TableCell className="text-red-600 font-medium py-3 px-5">
                   4%
                 </TableCell>
-                <TableCell className="text-center">-</TableCell>
+                <TableCell className="text-gray-800 py-3 px-5">-</TableCell>
               </TableRow>
             </TableBody>
           </Table>

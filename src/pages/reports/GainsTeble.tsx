@@ -17,49 +17,47 @@ import { LineChartIcon } from "lucide-react";
 export default function GainsTable() {
   return (
     <>
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <LineChartIcon className="w-5 h-5 text-primary" />
-          <span> Gains Table</span>
+      <CardHeader className="pb-4">
+        <CardTitle className="text-2xl font-semibold text-gray-900 flex items-center gap-3">
+          <LineChartIcon className="w-7 h-7 text-primary" />
+          <span>Gains Table</span>
         </CardTitle>
-        <CardDescription className="text-base">
+        <CardDescription className="text-base text-gray-600 mt-2">
           Gains table showing cumulative goods, bads, and rates by score
         </CardDescription>
       </CardHeader>
-
-      <CardContent>
+      <CardContent className="pt-0">
         <div className="overflow-x-auto">
-          <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
+          <Table className="w-full border-collapse">
             <TableHeader>
-              <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white hover:bg-indigo-800">
-                <TableHead className="font-bold text-white">Score</TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Count
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Cumulative Count
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Goods
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Bads
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Cumulative Goods
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Cumulative Bads
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Interval Bad Rate
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Cumulative Bad Rate
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Approval Rate
-                </TableHead>
+              <TableRow className="bg-primary/90 hover:bg-primary/80 transition-all">
+                {[
+                  "Score",
+                  "Count",
+                  "Cumulative Count",
+                  "Goods",
+                  "Bads",
+                  "Cumulative Goods",
+                  "Cumulative Bads",
+                  "Interval Bad Rate",
+                  "Cumulative Bad Rate",
+                  "Approval Rate",
+                ].map((title, idx) => (
+                  <TableHead
+                    key={idx}
+                    className={`text-white font-semibold text-left py-3 px-5 whitespace-nowrap ${
+                      idx === 0 ? "first:rounded-tl-lg" : ""
+                    } ${idx === 9 ? "last:rounded-tr-lg" : ""}`}
+                  >
+                    {title.includes(" ")
+                      ? title.split(" ").map((t, i) => (
+                          <span key={i}>
+                            {t} <br />
+                          </span>
+                        ))
+                      : title}
+                  </TableHead>
+                ))}
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -115,28 +113,36 @@ export default function GainsTable() {
               ].map((row) => (
                 <TableRow
                   key={row.score}
-                  className="hover:bg-indigo-50 transition-colors"
+                  className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200"
                 >
-                  <TableCell className="font-bold text-primary">
+                  <TableCell className="font-semibold text-primary py-3 px-5">
                     {row.score}
                   </TableCell>
-                  <TableCell className="text-center">{row.count}</TableCell>
-                  <TableCell className="text-center">{row.cumCount}</TableCell>
-                  <TableCell className="text-center">{row.goods}</TableCell>
-                  <TableCell className="text-center text-destructive">
+                  <TableCell className="text-gray-800 py-3 px-5">
+                    {row.count}
+                  </TableCell>
+                  <TableCell className="text-gray-800 py-3 px-5">
+                    {row.cumCount}
+                  </TableCell>
+                  <TableCell className="text-green-600 font-medium py-3 px-5">
+                    {row.goods}
+                  </TableCell>
+                  <TableCell className="text-red-600 font-medium py-3 px-5">
                     {row.bads}
                   </TableCell>
-                  <TableCell className="text-center">{row.cumGoods}</TableCell>
-                  <TableCell className="text-center text-destructive">
+                  <TableCell className="text-gray-800 py-3 px-5">
+                    {row.cumGoods}
+                  </TableCell>
+                  <TableCell className="text-gray-800 py-3 px-5">
                     {row.cumBads}
                   </TableCell>
-                  <TableCell className="text-center text-destructive">
+                  <TableCell className="text-gray-800 py-3 px-5">
                     {row.intBad}
                   </TableCell>
-                  <TableCell className="text-center text-destructive">
+                  <TableCell className="text-gray-800 py-3 px-5">
                     {row.cumBad}
                   </TableCell>
-                  <TableCell className="text-center text-primary font-semibold">
+                  <TableCell className="text-gray-800 font-medium py-3 px-5">
                     {row.approval}
                   </TableCell>
                 </TableRow>
