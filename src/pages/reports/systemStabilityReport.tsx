@@ -17,175 +17,87 @@ import { Activity } from "lucide-react";
 export default function SystemStabilityReport() {
   return (
     <>
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <Activity className="w-5 h-5 text-primary" />
+      <CardHeader className="pb-4">
+        <CardTitle className="text-2xl font-semibold text-gray-900 flex items-center gap-3">
+          <Activity className="w-7 h-7 text-primary" />
           <span>System Stability Report</span>
         </CardTitle>
-        <CardDescription className="text-base">
+        <CardDescription className="text-base text-gray-600 mt-2">
           Comparison of actual vs. expected bad rates across score ranges with
           stability index
         </CardDescription>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="pt-0">
         <div className="overflow-x-auto">
-          <Table className="border-2 border-gray-300 rounded-xl shadow-lg bg-white">
+          <Table className="w-full border-collapse">
             <TableHeader>
-              <TableRow className="bg-gradient-to-r from-primary to-indigo-700 text-white hover:bg-indigo-800">
-                <TableHead className="font-bold text-white">
-                  Score Range
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Actual %
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Expected %
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  (A-E)
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  A/E
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  ln(A/E)
-                </TableHead>
-                <TableHead className="font-bold text-white text-center">
-                  Index
-                </TableHead>
+              <TableRow className="bg-primary/90 hover:bg-primary/80 transition-all">
+                {[
+                  "Score Range",
+                  "Actual %",
+                  "Expected %",
+                  "(A-E)",
+                  "A/E",
+                  "ln(A/E)",
+                  "Index",
+                ].map((title, idx, arr) => (
+                  <TableHead
+                    key={title}
+                    className={`text-white font-semibold text-left py-3 px-5 whitespace-nowrap ${
+                      idx === 0 ? "rounded-tl-lg" : ""
+                    } ${idx === arr.length - 1 ? "rounded-tr-lg" : ""}`}
+                  >
+                    {title}
+                  </TableHead>
+                ))}
               </TableRow>
             </TableHeader>
-            <TableBody>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">0-169</TableCell>
-                <TableCell className="text-center text-destructive">
-                  7%
-                </TableCell>
-                <TableCell className="text-center">8%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  -1%
-                </TableCell>
-                <TableCell className="text-center">0.8750</TableCell>
-                <TableCell className="text-center">-0.1335</TableCell>
-                <TableCell className="text-center">0.0013</TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">170-179</TableCell>
-                <TableCell className="text-center text-destructive">
-                  8%
-                </TableCell>
-                <TableCell className="text-center">10%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  -2%
-                </TableCell>
-                <TableCell className="text-center">0.8000</TableCell>
-                <TableCell className="text-center">-0.2231</TableCell>
-                <TableCell className="text-center">0.0045</TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">180-189</TableCell>
-                <TableCell className="text-center text-destructive">
-                  7%
-                </TableCell>
-                <TableCell className="text-center">9%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  -2%
-                </TableCell>
-                <TableCell className="text-center">0.7778</TableCell>
-                <TableCell className="text-center">-0.2515</TableCell>
-                <TableCell className="text-center">0.0050</TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">190-199</TableCell>
-                <TableCell className="text-center text-destructive">
-                  9%
-                </TableCell>
-                <TableCell className="text-center">13%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  -4%
-                </TableCell>
-                <TableCell className="text-center">0.6923</TableCell>
-                <TableCell className="text-center">-0.3677</TableCell>
-                <TableCell className="text-center">0.0147</TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">200-209</TableCell>
-                <TableCell className="text-center text-destructive">
-                  11%
-                </TableCell>
-                <TableCell className="text-center">13%</TableCell>
-                <TableCell className="text-center text-destructive">
-                  -2%
-                </TableCell>
-                <TableCell className="text-center">0.8462</TableCell>
-                <TableCell className="text-center">-0.1671</TableCell>
-                <TableCell className="text-center">0.0033</TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">210-219</TableCell>
-                <TableCell className="text-center text-destructive">
-                  11%
-                </TableCell>
-                <TableCell className="text-center">10%</TableCell>
-                <TableCell className="text-center text-primary">1%</TableCell>
-                <TableCell className="text-center">1.1000</TableCell>
-                <TableCell className="text-center">0.0953</TableCell>
-                <TableCell className="text-center">0.0010</TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">220-229</TableCell>
-                <TableCell className="text-center text-destructive">
-                  10%
-                </TableCell>
-                <TableCell className="text-center">9%</TableCell>
-                <TableCell className="text-center text-primary">1%</TableCell>
-                <TableCell className="text-center">1.1111</TableCell>
-                <TableCell className="text-center">0.1054</TableCell>
-                <TableCell className="text-center">0.0011</TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">230-239</TableCell>
-                <TableCell className="text-center text-destructive">
-                  12%
-                </TableCell>
-                <TableCell className="text-center">10%</TableCell>
-                <TableCell className="text-center text-primary">2%</TableCell>
-                <TableCell className="text-center">1.2000</TableCell>
-                <TableCell className="text-center">0.1823</TableCell>
-                <TableCell className="text-center">0.0036</TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">240-249</TableCell>
-                <TableCell className="text-center text-destructive">
-                  11%
-                </TableCell>
-                <TableCell className="text-center">11%</TableCell>
-                <TableCell className="text-center">0%</TableCell>
-                <TableCell className="text-center">1.0000</TableCell>
-                <TableCell className="text-center">0.0000</TableCell>
-                <TableCell className="text-center">0.0000</TableCell>
-              </TableRow>
-              <TableRow className="hover:bg-indigo-50 transition-colors">
-                <TableCell className="font-medium">250+</TableCell>
-                <TableCell className="text-center text-destructive">
-                  14%
-                </TableCell>
-                <TableCell className="text-center">9%</TableCell>
-                <TableCell className="text-center text-primary">5%</TableCell>
-                <TableCell className="text-center">1.5556</TableCell>
-                <TableCell className="text-center">0.4418</TableCell>
-                <TableCell className="text-center">0.0221</TableCell>
-              </TableRow>
 
-              <TableRow className="font-bold bg-muted hover:bg-indigo-50 transition-colors">
-                <TableCell>Total</TableCell>
-                <TableCell className="text-center">-</TableCell>
-                <TableCell className="text-center">-</TableCell>
-                <TableCell className="text-center">-</TableCell>
-                <TableCell className="text-center">-</TableCell>
-                <TableCell className="text-center">-</TableCell>
-                <TableCell className="text-center text-primary font-semibold">
+            <TableBody>
+              {[
+                ["0-169", "7%", "8%", "-1%", "0.8750", "-0.1335", "0.0013"],
+                ["170-179", "8%", "10%", "-2%", "0.8000", "-0.2231", "0.0045"],
+                ["180-189", "7%", "9%", "-2%", "0.7778", "-0.2515", "0.0050"],
+                ["190-199", "9%", "13%", "-4%", "0.6923", "-0.3677", "0.0147"],
+                ["200-209", "11%", "13%", "-2%", "0.8462", "-0.1671", "0.0033"],
+                ["210-219", "11%", "10%", "1%", "1.1000", "0.0953", "0.0010"],
+                ["220-229", "10%", "9%", "1%", "1.1111", "0.1054", "0.0011"],
+                ["230-239", "12%", "10%", "2%", "1.2000", "0.1823", "0.0036"],
+                ["240-249", "11%", "11%", "0%", "1.0000", "0.0000", "0.0000"],
+                ["250+", "14%", "9%", "5%", "1.5556", "0.4418", "0.0221"],
+              ].map((row) => (
+                <TableRow
+                  key={row[0]}
+                  className="border-b border-gray-200 hover:bg-primary/5 transition-colors duration-200"
+                >
+                  {/* Score Range */}
+                  <TableCell className="font-semibold text-primary py-3 px-5">
+                    {row[0]}
+                  </TableCell>
+
+                  {/* Other values */}
+                  {row.slice(1).map((cell, i) => (
+                    <TableCell
+                      key={i}
+                      className="py-3 px-5 text-left text-gray-900"
+                    >
+                      {cell}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+
+              <TableRow className="border-t border-gray-300 hover:bg-primary/5 transition-colors">
+                <TableCell className="font-semibold text-primary py-3 px-5">
+                  Total
+                </TableCell>
+                <TableCell className="py-3 px-5 text-gray-900">-</TableCell>
+                <TableCell className="py-3 px-5 text-gray-900">-</TableCell>
+                <TableCell className="py-3 px-5 text-gray-900">-</TableCell>
+                <TableCell className="py-3 px-5 text-gray-900">-</TableCell>
+                <TableCell className="py-3 px-5 text-gray-900">-</TableCell>
+                <TableCell className="py-3 px-5 font-semibold text-gray-900">
                   Index = 0.0537
                 </TableCell>
               </TableRow>
